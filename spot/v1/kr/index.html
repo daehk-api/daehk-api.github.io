@@ -490,7 +490,10 @@
                     <a href="#fa255f0ccc-4" class="toc-h2 toc-link" data-title="소개">소개</a>
                   </li>
                   <li>
-                    <a href="#37b958a0ff" class="toc-h2 toc-link" data-title="결산 후 거래 명세서 구독">결산 후 거래 명세서 구독</a>
+                    <a href="#77105f2c9a" class="toc-h2 toc-link" data-title="주문서 업그레이드 구독">주문서 업그레이드 구독</a>
+                  </li>
+                  <li>
+                    <a href="#391686017d" class="toc-h2 toc-link" data-title="청산 후 체결 및 철회 업그레이드 구독">청산 후 체결 및 철회 업그레이드 구독</a>
                   </li>
                   <li>
                     <a href="#3913187169" class="toc-h2 toc-link" data-title="구독 계정 변경">구독 계정 변경</a>
@@ -832,7 +835,6 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 
 <ul>
 <li>spot: 현물 계정<br></li>
-<li>otc: OTC계정<br></li>
 <li>point: 수수료 쿠폰 계정</li>
 </ul>
 <h3 id='id'>주문서, 체결 관련 ID 설명</h3>
@@ -1202,7 +1204,6 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 
 <ul>
 <li>spot 현물 계정 </li>
-<li>otc OTC계정</li>
 <li>point 수수료 쿠폰 계정</li>
 </ul>
 <h3 id='q2-client-order-id'>Q2：client-order-id？</h3>
@@ -2522,18 +2523,6 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
       </span><span class="s2">"subtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
       </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"working"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100002</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"margin"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"subtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"working"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100003</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"otc"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"subtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"working"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='1cdfa62a31-11'>응답 데이터</h3>
@@ -2565,7 +2554,7 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 <td>string</td>
 <td>true</td>
 <td>계정 유형</td>
-<td>spot: 자산 계정, otc: C2C 계정, point: 포인트 쿠폰계정</td>
+<td>spot: 자산 계정, point: 포인트 쿠폰계정</td>
 </tr>
 </tbody></table>
 <h2 id='4aa79206f0'>계정 잔액</h2>
@@ -2573,7 +2562,7 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 
 <p>지정한 계정의 잔액 조회가 가능합니다. 아래 계정 지원:</p>
 
-<p>spot：현물 계정, otc：C2C 계정, point：수수료 쿠폰 계정</p>
+<p>spot：현물 계정, point：수수료 쿠폰 계정</p>
 <h3 id='http-13'>HTTP 요청</h3>
 <ul>
 <li>GET <code>/v1/account/accounts/{account-id}/balance</code></li>
@@ -2646,7 +2635,7 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 <td>string</td>
 <td>true</td>
 <td>계정 유형</td>
-<td>spot: 현물 계정, otc: C2C 계정, point: 수수료 쿠폰 계정</td>
+<td>spot: 현물 계정, point: 수수료 쿠폰 계정</td>
 </tr>
 <tr>
 <td>list</td>
@@ -7876,10 +7865,12 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 <p><strong>WebSocket 자산 및 주문(v2)</strong></p>
 
 <p><strong><code>wss://api-cloud.huobi.co.kr/ws/v2</code></strong>  </p>
+
+<p>중국 외 서버로 후오비 코리아 API를 접속하시기 바랍니다.</p>
 <h3 id='3788774859-3'>데이터 압축</h3>
-<p>없음</p>
+<p>v1 버전과 달리 v2 버전은 응답 데이터에 대하여 GZIP을 압축하지 않았습니다.</p>
 <h3 id='heartbeat-message-2'>Heartbeat Message</h3>
-<p>회원님의 WebSocket 클라이언트가 후오비 코리아 WebSocket 서버에 연결되면 서버는 정기적으로(현재 20초로 설정) <code>ping</code> 메세지를 발송하며 메시지에 아래와 같은 데이터를 포함합니다.</p>
+<p>회원님의 WebSocket 클라이언트가 후오비 코리아 WebSocket 서버에 연결되면 서버는 정기적으로(현재 20초로 설정) <code>ping</code> 메세지를 발송하며 메세지에 아래와 같은 데이터를 포함합니다.</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7887,7 +7878,7 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>회원님의 Websocket클라이언트가  Heartbeat Message를 접수후 <code>pong</code> 메시지를 반환하여야 하며 메시지에 같은 데이터를 포함하여야 합니다:</p>
+<p>회원님의 Websocket 클라이언트가  Heartbeat Message를 접수 후 <code>pong</code> 메시지를 반환하여야 하며 메시지에 같은 데이터를 포함하여야 합니다:</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -7915,9 +7906,17 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 </tr>
 <tr>
 <td>push</td>
-<td>푸쉬 데이터, 서버에서 고객 클라이언트에 발송하는 데이터 유형</td>
+<td>푸시 데이터, 서버에서 고객 클라이언트에 발송하는 데이터 유형</td>
 </tr>
 </tbody></table>
+<h3 id='rate-limit'>빈도 제한(Rate Limit)</h3>
+<p>이 버전은 사용자를 위한 다차원 빈도 제한 전략을 채택하며, 구체적인 전략은 다음과 같습니다:</p>
+
+<ul>
+<li>한 개의 연결하는 유효 요청(req，sub，unsub을 포함하고 ping/pong 및 기타 무효 요청은 포함하지 않습니다)은 50회/초(초는 슬라이드 윈도로 제한)로 제한합니다. 이 제한은 초과하는 경우 &quot;too many request&quot; 오류 메시지를 반환합니다.</li>
+<li>한 개의 API Key로 연결하는 개수를 10개로 제한합니다. 제한을 초과하는 경우 &quot;too many connection&quot; 오류 메시지를 반환합니다.</li>
+<li>한 개의 IP로 연결하는 수량은 100회/초로 제한합니다. 제한을 초과하는 경우 &quot;too many request&quot; 오류 메시지를 반환합니다.</li>
+</ul>
 <h3 id='ce7156229f-2'>인증</h3>
 <p>인증 요청 양식은 다음과 같습니다:</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -7929,7 +7928,7 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
         </span><span class="s2">"signatureMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HmacSHA256"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"signatureVersion"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.1"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-09-01T18:16:16"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"safsfdsjfljljdfsjfsjfsdfhsdkjfhklhsdlkfjhlksdfh"</span><span class="w">
+        </span><span class="s2">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4F65x5A2bLyMWVQj3Aqp+B4w+ivaA7n5Oi2SuYtCJ9o="</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -7946,7 +7945,7 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 
 <table><thead>
 <tr>
-<th>매 변수</th>
+<th>매개 변수</th>
 <th>필수 여부</th>
 <th>데이터 유형</th>
 <th>설명</th>
@@ -7968,19 +7967,19 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 <td>authType</td>
 <td>true</td>
 <td>string</td>
-<td>인증 유형, 인증 고정값은 api</td>
+<td>인증 유형, 인증 고정값은 api. 주의: 이 파라미터는 서명 계산에 없습니다.</td>
 </tr>
 <tr>
 <td>accessKey</td>
 <td>true</td>
 <td>string</td>
-<td>회원이 요청한 API Key의  AccessKey</td>
+<td>회원이 신청한 API Key의  AccessKey</td>
 </tr>
 <tr>
 <td>signatureMethod</td>
 <td>true</td>
 <td>string</td>
-<td>선택, 서명 방법, 회원 서명 계산의 hash 기반 프로토콜, 여기서는 HmacSHA256를 사용합니다</td>
+<td>선택, 서명 방법, 회원 서명 계산의 hash 기반 프로토콜, 여기서는 HmacSHA256를 사용합니다.</td>
 </tr>
 <tr>
 <td>signatureVersion</td>
@@ -7992,7 +7991,7 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 <td>timestamp</td>
 <td>true</td>
 <td>string</td>
-<td>선택, 회원님이 요청한 시간(UTC 시간대), 쿼리 요청 시 해당 값을 포함하면 제3자가 회원님의 요청을 가로챌 수 없습니다. 예) 2017-05-11 T16:22:06. UTC 시간대 입니다, 유의 하시기 바랍니다.</td>
+<td>선택, 회원님이 요청한 시간(UTC 시간대), 쿼리 요청 시 해당 값을 포함하면 제 3자가 회원님의 요청을 가로챌 수 없습니다. 예) 2017-05-11 T16:22:06. UTC 시간대 입니다, 유의 하시기 바랍니다.</td>
 </tr>
 <tr>
 <td>signature</td>
@@ -8005,19 +8004,21 @@ UTF-8 방식으로 인코딩되고 URI 인코딩 됩니다. 16진수 문자는 �
 <p>v2.1서명은  v2.0서명과 절차가 비슷합니다, 차이점은 다음과 같습니다:</p>
 
 <ol>
-<li><p>서명에 필요한 문자열 생성 시 요청 방법은 GET로 하고 요청 주소는 /ws/v2로 고정합니다.</p></li>
-<li><p>서명에 필요한 고정 파라미터를 다음으로 교체: accessKey，signatureMethod，signatureVersion，timestamp</p></li>
-<li><p>signatureVersion버전을 2.1로 업데이트</p></li>
+<li>서명에 필요한 문자열 생성 시 요청 방법은 GET로 하고 요청 주소는 /ws/v2로 고정합니다.</li>
+<li>서명에 필요한 고정 파라미터를 다음으로 교체: accessKey，signatureMethod，signatureVersion，timestamp</li>
+<li>signatureVersion버전을 2.1로 업데이트</li>
 </ol>
 
-<p>v2버전 서명 절차는 본 <a href='#c64cd15fdc'>링크</a> 에서 확인하세요.</p>
+<p>v2 버전 서명 절차는 본 <a href='https://alphaex-api.github.io/openapi/spot/v1/kr/#6b0564d454'>링크</a>에서 확인하십시오.</p>
 
 <p>서명 전 마지막으로 생성한 문자열은 다음과 같습니다:</p>
 <pre class="highlight plaintext"><code>GET\n
 api-cloud.huobi.co.kr\n
 /ws/v2\n
 accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;signatureVersion=2.1&amp;timestamp=2019-12-05T11%3A53%3A03
-</code></pre><h3 id='0c2caccf73-11'>구독 주제</h3>
+</code></pre>
+<p>주의: JSON 요청에서 데이터는 URL 코딩을 하지 않아도 됩니다.</p>
+<h3 id='0c2caccf73-11'>구독 주제</h3>
 <p>WebSocket 서버에 성공적으로 연결되면 WebSocket 클라이언트는 특정 주제를 구독하기 위해 다음 요청을 보냅니다.</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
@@ -8032,7 +8033,7 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='34342b862d-11'>요청 데이터</h3>
-<p>Websocket 서버에 연결 시 Websocket 클라이언트는 다음과 같은 일괄적 데이터를 발송 합니다:</p>
+<p>Websocket 서버에 연결 시 Websocket 클라이언트는 다음과 같은 일괄적 데이터를 발송합니다:</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"req"</span><span class="p">,</span><span class="w"> 
     </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"topic"</span><span class="p">,</span><span class="w">
@@ -8045,33 +8046,140 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
     </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">요청</span><span class="w"> </span><span class="err">데이터</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='37b958a0ff'>결산 후 거래 명세서 구독</h2>
-<p>API Key 권한: 읽기</p>
+</span></code></pre><h3 id='e9e52e3de4-4'>오류 코드</h3>
+<p>다음은 WebSocket 자산과 주문 API의 오류 코드, 오류 메시지에 대한 설명입니다.</p>
 
-<p>결산 후 거래 명세서는 거래 수수료 및 거래 수수료 삭감 등 정보를 포함하고 고객의 주문이 체결 될 때만 푸쉬합니다.</p>
-<h3 id='0c2caccf73-12'>구독 주제</h3>
-<p><code>trade.clearing#${symbol}</code></p>
-<h3 id='ea6eed63c9'>구독 매개 변수</h3>
 <table><thead>
 <tr>
-<th>매개 변수</th>
-<th>데이터 유형</th>
+<th>오류 코드</th>
+<th>오류 메시지</th>
 <th>설명</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>symbol</td>
-<td>string</td>
-<td>거래 코드(부호&quot;*&quot; 지원)</td>
+<td>200</td>
+<td>Success</td>
+<td>정확한 응답</td>
+</tr>
+<tr>
+<td>100</td>
+<td>timeout close</td>
+<td>timeout close</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>요청 오류</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>서비스를 찾을 수 없습니다.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests</td>
+<td>한 개의 설비로 최대 연결수 초과 혹은 IP 최대 연결수를 초과하였습니다.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>system error</td>
+<td>시스템 오류</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>invalid.ip</td>
+<td>ip 무효</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>nvalid.json</td>
+<td>json 요청 무효</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.authType</td>
+<td>인증 방법 오류</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.action</td>
+<td>구독 이벤트 무효</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.symbol</td>
+<td>거래 페어 무효</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.ch</td>
+<td>구독 무효</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.exchange</td>
+<td>거래소 code 무효</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>missing.param.auth</td>
+<td>인증 파라미터 없음</td>
+</tr>
+<tr>
+<td>2002</td>
+<td>invalid.auth.state</td>
+<td>인증 미통과</td>
+</tr>
+<tr>
+<td>2002</td>
+<td>auth.fail</td>
+<td>인증 실패</td>
+</tr>
+<tr>
+<td>2003</td>
+<td>query.account.list.error</td>
+<td>계정 리스트 조회 실패</td>
+</tr>
+<tr>
+<td>4000</td>
+<td>too.many.request</td>
+<td>클라이언트 요청 상한 초과</td>
+</tr>
+<tr>
+<td>4000</td>
+<td>too.many.connection</td>
+<td>같은 key 연결수 초과</td>
 </tr>
 </tbody></table>
+<h2 id='77105f2c9a'>주문서 업그레이드 구독</h2>
+<p>API Key 권한: 읽기</p>
 
+<p>다음 임의의 이벤트에 의해 주문서의 푸시가 업그레이드 됩니다:<br></p>
+
+<ul>
+<li>계획 위탁 혹은 추적 위탁 실패 이벤트（eventType=trigger）<br></li>
+<li>계획 위탁 혹은 추적 위탁 작동전 주문 철회 이벤트（eventType=deletion）<br></li>
+<li>주문서 생성（eventType=creation）<br></li>
+<li>주문서 체결（eventType=trade）<br></li>
+<li>주문서 철회（eventType=cancellation）<br></li>
+</ul>
+
+<p>서로 다른 이벤트 유형의 푸시 메세지중 필드 리스트가 조금 다릅니다. 개발자는 다음 2가지 방식을 채택하여 응답 데이터를 받을 수 있습니다:<br></p>
+
+<ul>
+<li>모든 필드를 포함한 데이터 구조를 정하고 일부 필드를 NULL로 허용<br></li>
+<li>서로 다른 데이터 구조를 정하고 각 필드를 포함하고 공용 데이터 필드를 계승한 데이터 구조</li>
+</ul>
+<h3 id='0c2caccf73-12'>구독 주제</h3>
+<p><code>orders#${symbol}</code></p>
+<h3 id='f86a024ea3'>구독 파라미터</h3>
 <blockquote>
 <p>Subscribe request</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt"</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders#btcusdt"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -8079,48 +8187,290 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <p>Response</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<blockquote>
-<p>Update example</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">99998888</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"tradePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9999.99"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"tradeVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.96"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"orderSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"aggressor"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">919219323232</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">998787897878</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"transactFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.88"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">" feeDeduct "</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">" feeDeductType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='43da461ca4-6'>데이터 업데이트 필드 리스트</h3>
 <table><thead>
 <tr>
 <th>매개 변수</th>
-<th>데이터 유형</th>
+<th>유형</th>
 <th>설명</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>symbol</td>
 <td>string</td>
+<td>거래 코드(와일드카드* 지원)</td>
+</tr>
+</tbody></table>
+<h3 id='80bc05bf24'>데이터 업그레이드 필드 리스트</h3>
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"orderSide"</span><span class="p">:</span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastActTime"</span><span class="p">:</span><span class="mi">1583853365586</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"trigger"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"errCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">2002</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"errMessage"</span><span class="p">:</span><span class="s2">"invalid.client.order.id (NT)"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>조건부 주문 작동 실패 후 –</p>
+
+<table><thead>
+<tr>
+<th>매개 변수</th>
+<th>유형</th>
+<th>설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>이벤트 유형, 유효값: trigger(본 이벤트는 계획 위탁/추적 위탁에만 유효)</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
 <td>거래 코드</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>유저가 정한 주문번호</td>
+</tr>
+<tr>
+<td>orderSide</td>
+<td>string</td>
+<td>주문 방향, 유효값: buy,sell</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>주문 상태, 유효값: rejected</td>
+</tr>
+<tr>
+<td>errCode</td>
+<td>int</td>
+<td>주문 실패 오류 코드</td>
+</tr>
+<tr>
+<td>errMessage</td>
+<td>string</td>
+<td>주문 실패 오류 메시지</td>
+</tr>
+<tr>
+<td>lastActTime</td>
+<td>long</td>
+<td>주문 실패 시간</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"orderSide"</span><span class="p">:</span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastActTime"</span><span class="p">:</span><span class="mi">1583853365586</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"deletion"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>조건부 주문이 작동되기 전 주문이 철회가 되었을 시 –</p>
+
+<table><thead>
+<tr>
+<th>매개 변수</th>
+<th>유형</th>
+<th>설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>이벤트 유형, 유효값:deletion(본 이벤트는 계획 위탁/추적 위탁에만 유효)</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>거래 코드</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>유저가 정한 주문번호</td>
+</tr>
+<tr>
+<td>orderSide</td>
+<td>string</td>
+<td>주문 방향, 유효값:buy,sell</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>주문 상태, 유효값:canceled</td>
+</tr>
+<tr>
+<td>lastActTime</td>
+<td>long</td>
+<td>주문 철회 시간</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"orderSize"</span><span class="p">:</span><span class="s2">"2.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderCreateTime"</span><span class="p">:</span><span class="mi">1583853365586</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"accountId"</span><span class="p">:</span><span class="mi">992701</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderPrice"</span><span class="p">:</span><span class="s2">"77.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"sell-limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="mi">27163533</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"submitted"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"creation"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>주문서 제출 후 –</p>
+
+<table><thead>
+<tr>
+<th>매개 변수</th>
+<th>유형</th>
+<th>설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>이벤트 유형, 유효값:creation</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>거래 코드</td>
+</tr>
+<tr>
+<td>accountId</td>
+<td>long</td>
+<td>계정ID</td>
 </tr>
 <tr>
 <td>orderId</td>
 <td>long</td>
-<td>주문서ID</td>
+<td>주문ID</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>유저가 정한 주문번호(있는 경우)</td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>string</td>
+<td>주문 가격</td>
+</tr>
+<tr>
+<td>orderSize</td>
+<td>string</td>
+<td>주문 수량(시장가 매수는 무효)</td>
+</tr>
+<tr>
+<td>orderValue</td>
+<td>string</td>
+<td>주문 금액(시장가 매수 주문에만 유효)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>주문 유형, 유효값:buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>주문 상태, 유효값:submitted</td>
+</tr>
+<tr>
+<td>orderCreateTime</td>
+<td>long</td>
+<td>주문 생성 시간</td>
+</tr>
+</tbody></table>
+
+<p>주의：<BR></p>
+
+<ul>
+<li>스탑리밋 주문은 작동 되기전 API는 주문서 생성을 푸쉬하지 않습니다;<br></li>
+<li>Taker 주문서는 체결 전, API는 우선적으로 생성 이벤트를 푸쉬 합니다.<br></li>
+<li>스탑리밋 주문의 주문 유형은 오리지널 주문 유형인 “buy-stop-limit”혹은 “sell-stop-limit”이 아니고 “buy-limit”혹은 “sell-limit”으로 변경됩니다.<BR></li>
+</ul>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tradePrice"</span><span class="p">:</span><span class="s2">"76.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeVolume"</span><span class="p">:</span><span class="s2">"1.013157894736842100"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="mi">301</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeTime"</span><span class="p">:</span><span class="mi">1583854188883</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"aggressor"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remainAmt"</span><span class="p">:</span><span class="s2">"0.000000000000000400000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="mi">27163536</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"sell-limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"filled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"trade"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>주문 체결 후 –</p>
+
+<table><thead>
+<tr>
+<th>매개 변수</th>
+<th>유형</th>
+<th>설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>이벤트 유형, 유효값:trade</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>거래 코드</td>
 </tr>
 <tr>
 <td>tradePrice</td>
@@ -8130,22 +8480,22 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <tr>
 <td>tradeVolume</td>
 <td>string</td>
-<td>체결 수량</td>
+<td>체결량</td>
 </tr>
 <tr>
-<td>orderSide</td>
+<td>orderId</td>
+<td>long</td>
+<td>주문ID</td>
+</tr>
+<tr>
+<td>type</td>
 <td>string</td>
-<td>주문 방향, 유효값:  buy, sell</td>
+<td>주문 유형, 유효값:buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc</td>
 </tr>
 <tr>
-<td>orderType</td>
+<td>clientOrderId</td>
 <td>string</td>
-<td>주문 유형, 유효값:  buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit</td>
-</tr>
-<tr>
-<td>aggressor</td>
-<td>bool</td>
-<td>거래 주동측 여부, 유효값: true, false</td>
+<td>유저가 정한 주문번호(있는 경우)</td>
 </tr>
 <tr>
 <td>tradeId</td>
@@ -8155,38 +8505,428 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <tr>
 <td>tradeTime</td>
 <td>long</td>
+<td>체결 시간</td>
+</tr>
+<tr>
+<td>aggressor</td>
+<td>bool</td>
+<td>주동 거래측 여부, 유효값: true (taker), false (maker)</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>주문 상태, 유효값:partial-filled, filled</td>
+</tr>
+<tr>
+<td>remainAmt</td>
+<td>string</td>
+<td>미체결 수량(시장가 매수 주문이 미체결 금액)</td>
+</tr>
+</tbody></table>
+
+<p>주의:<BR></p>
+
+<ul>
+<li>스탑리밋 주문의 주문 유형은 오리지널 주문 유형인 “buy-stop-limit”혹은 “sell-stop-limit”이 아니고 “buy-limit”혹은 “sell-limit”으로 변경 됩니다.<BR></li>
+<li>한 개 taker 주문이 상대 측 여러 주문과 체결 후 생성되는 체결 내역(tradePrice, tradeVolume, tradeTime, tradeId, aggressor)은 결합하여 한 개로 푸시 하지 않고 각각 나누어 푸시합니다. <BR></li>
+</ul>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"lastActTime"</span><span class="p">:</span><span class="mi">1583853475406</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remainAmt"</span><span class="p">:</span><span class="s2">"2.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="mi">27163533</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"sell-limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"cancellation"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>주문 철회 후 –</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">매개 변수</th>
+<th style="text-align: left">유형</th>
+<th style="text-align: left">설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">eventType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">이벤트 유형, 유효값:cancellation</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">거래 코드</td>
+</tr>
+<tr>
+<td style="text-align: left">orderId</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">주문ID</td>
+</tr>
+<tr>
+<td style="text-align: left">type</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 유형, 유효값:buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc</td>
+</tr>
+<tr>
+<td style="text-align: left">clientOrderId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">유저가 정한 주문번호(있는 경우)</td>
+</tr>
+<tr>
+<td style="text-align: left">orderStatus</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 상태, 유효값:partial-canceled, canceled</td>
+</tr>
+<tr>
+<td style="text-align: left">remainAmt</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">미체결 수량(시장가 매수 주문인 경우 미체결금액)</td>
+</tr>
+<tr>
+<td style="text-align: left">lastActTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">주문서 마지막 업데이트 시간</td>
+</tr>
+</tbody></table>
+
+<p>注：<BR></p>
+
+<ul>
+<li>스탑리밋 주문의 주문 유형은 오리지널 주문 유형인 “buy-stop-limit”혹은 “sell-stop-limit”이 아니고 “buy-limit”혹은 “sell-limit”으로 변경됩니다.<BR></li>
+</ul>
+<h2 id='391686017d'>청산 후 체결 및 철회 업그레이드 구독</h2>
+<p>API Key 권한: 읽기</p>
+
+<p>유저 주문이 체결 혹은 철회 경우에만 푸시 합니다. 주문이 체결되는 경우에는 하나씩 푸시합니다. 한 개 taker 주문이 여러 개 maker 주문과 체결되면 이 API는 업데이트 내용을 하나씩 푸시합니다. 하지만 고객이 받은 체결 메세지 순서는 실제 체결된 순서와 다를 수 있습니다. 만약 1개 주문서가 체결 및 철회가 동시에 발생하는 경우, 예를 들면 IOC 주문서는 체결 후 남은 부분은 자동으로 철회되는 경우 유저는 우선 철회 푸시를 받고 그다음 체결 푸시를 받습니다.<br></p>
+
+<p>만약 유저가 주문서 업데이트를 순서대로 푸시 받으려면 다른 채널을 구독하기 바랍니다.</p>
+
+<p>orders#${symbol}。<br></p>
+<h3 id='0c2caccf73-13'>구독 주제</h3>
+<p><code>trade.clearing#${symbol}#${mode}</code></p>
+<h3 id='f86a024ea3-2'>구독 파라미터</h3>
+<table><thead>
+<tr>
+<th>매개 변수</th>
+<th>유형</th>
+<th>필수 여부</th>
+<th>설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>TRUE</td>
+<td>거래 코드(와일드카드* 지원)</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>int</td>
+<td>FALSE</td>
+<td>푸시 모드(0 - 주문이 체결 되는 경우에만 푸시; 1 - 주문이 체결/철회 되는 경우에 전부 푸시; 디폴트:0 )</td>
+</tr>
+</tbody></table>
+
+<p>주의:<br></p>
+
+<p>매개 변수 mode를 입력하지 않거나 0을 입력한 경우 체결 이벤트만 푸시 합니다; 만약 1을 입력하면 체결 및 철회 이벤트를 푸시 합니다.<br></p>
+
+<blockquote>
+<p>Subscribe request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt#0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt#0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt#0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">99998888</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"tradePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9999.99"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"tradeVolume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.96"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderSide"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"aggressor"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">919219323232</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">998787897878</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"transactFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.88"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"feeDeduct "</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"feeDeductType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">9912791</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot-api"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a001"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderCreateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">998787897878</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partial-filled"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='4b586d162b'>데이터 업그레이드 파라미터 리스트(주문이 체결된 후)</h3>
+<table><thead>
+<tr>
+<th>매개변수</th>
+<th>유형</th>
+<th>설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>이벤트 유형（trade）</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>거래 코드</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>long</td>
+<td>주문ID</td>
+</tr>
+<tr>
+<td>tradePrice</td>
+<td>string</td>
+<td>체결 가격</td>
+</tr>
+<tr>
+<td>tradeVolume</td>
+<td>string</td>
+<td>체결량</td>
+</tr>
+<tr>
+<td>orderSide</td>
+<td>string</td>
+<td>주문 방향, 유효값: buy, sell</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>string</td>
+<td>주문 유형, 유효값:buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit</td>
+</tr>
+<tr>
+<td>aggressor</td>
+<td>bool</td>
+<td>주동 거래측 여부, 유효값: true, false</td>
+</tr>
+<tr>
+<td>tradeId</td>
+<td>long</td>
+<td>거래 ID</td>
+</tr>
+<tr>
+<td>tradeTime</td>
+<td>long</td>
 <td>체결 시간, unix time in millisecond</td>
 </tr>
 <tr>
 <td>transactFee</td>
 <td>string</td>
-<td>거래 수수료</td>
+<td>거래 수수료(양수) 혹은 거래수수료 페이백(음수)</td>
+</tr>
+<tr>
+<td>feeCurrency</td>
+<td>string</td>
+<td>거래 수수료 혹은 거래 수수료 페이백 코인(매수 주문 거래 수수료 코인은 거래 화폐이고 매도 주문 거래 수수료 코인은 마켓 화폐; 매수 주문 거래 수수료 페이백 코인은 마켓 화폐이고 매도 주문 거래 수수료 페이백 코인은 거래 화폐입니다)</td>
 </tr>
 <tr>
 <td>feeDeduct</td>
 <td>string</td>
-<td>차감 거래 수수료</td>
+<td>거래 수수료 삭감</td>
 </tr>
 <tr>
 <td>feeDeductType</td>
 <td>string</td>
-<td>처감 거래 수수료 유형, 유효값: ht，point</td>
+<td>거래 수수료 삭감 유형, 유효값:ht, point</td>
+</tr>
+<tr>
+<td>accountId</td>
+<td>long</td>
+<td>계정번호</td>
+</tr>
+<tr>
+<td>source</td>
+<td>string</td>
+<td>주문서 소스</td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>string</td>
+<td>주문 가격(시장가 주문은 이 필드가 없습니다)</td>
+</tr>
+<tr>
+<td>orderSize</td>
+<td>string</td>
+<td>주문 수량(시장가 매수 주문은 이 필드가 없습니다)</td>
+</tr>
+<tr>
+<td>orderValue</td>
+<td>string</td>
+<td>주문 금액(시장가 매수 주문인 경우에만 이 필드가 있습니다)</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>유저가 정한 주문 번호</td>
+</tr>
+<tr>
+<td>stopPrice</td>
+<td>string</td>
+<td>주문 유발 가격(스탑리밋 주문에만 이 필드가 있습니다)</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>string</td>
+<td>주문 유발 방향(스탑리밋 주문에만 이 필드가 있습니다)</td>
+</tr>
+<tr>
+<td>orderCreateTime</td>
+<td>long</td>
+<td>주문 생성 시간</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>주문 상태, 유효값:filled, partial-filled</td>
+</tr>
+</tbody></table>
+
+<p>주의:<br></p>
+
+<ul>
+<li>transactFee에서 거래 페이백 금액은 실시간으로 입금되지 않을 수 있습니다;<br></li>
+</ul>
+<h3 id='000c2ee9d6'>데이터 업그레이드 파라미터 리스트(주문 철회 후)</h3>
+<table><thead>
+<tr>
+<th style="text-align: left">매개 변수</th>
+<th style="text-align: left">유형</th>
+<th style="text-align: left">설명</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">eventType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">이벤트 유형(cancellation)</td>
+</tr>
+<tr>
+<td style="text-align: left">symbol</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">거래 코드</td>
+</tr>
+<tr>
+<td style="text-align: left">orderId</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">주문ID</td>
+</tr>
+<tr>
+<td style="text-align: left">orderSide</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 방향, 유효값: buy, sell</td>
+</tr>
+<tr>
+<td style="text-align: left">orderType</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 유형, 유효값:buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit</td>
+</tr>
+<tr>
+<td style="text-align: left">accountId</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">계정 번호</td>
+</tr>
+<tr>
+<td style="text-align: left">source</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 소스</td>
+</tr>
+<tr>
+<td style="text-align: left">orderPrice</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 가격(시장가 주문은 이 필드가 없습니다)</td>
+</tr>
+<tr>
+<td style="text-align: left">orderSize</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 수량(시장가 매수 주문은 이 필드가 없습니다)</td>
+</tr>
+<tr>
+<td style="text-align: left">orderValue</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 금액(시장가 매수 주문에만 이 필드가 있습니다)</td>
+</tr>
+<tr>
+<td style="text-align: left">clientOrderId</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">유저가 정한 주문 번호</td>
+</tr>
+<tr>
+<td style="text-align: left">stopPrice</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 유발 가격(스탑리밋 주문에만 이 필드가 있습니다)</td>
+</tr>
+<tr>
+<td style="text-align: left">operator</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 유발 방향(스탑리밋 주문에만 이 필드가 있습니다)</td>
+</tr>
+<tr>
+<td style="text-align: left">orderCreateTime</td>
+<td style="text-align: left">long</td>
+<td style="text-align: left">주문 생성 시간</td>
+</tr>
+<tr>
+<td style="text-align: left">remainAmt</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">미 체결량(시장가 매수 주문인 경우 이 필드는 미체결금액 입니다)</td>
+</tr>
+<tr>
+<td style="text-align: left">orderStatus</td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">주문 상태, 유효값:canceled, partial-canceled</td>
 </tr>
 </tbody></table>
 <h2 id='3913187169'>구독 계정 변경</h2>
 <p>API Key 권한: 읽기</p>
 
-<p>구독 계정에서 주문 업데이트.</p>
-<h3 id='0c2caccf73-13'>구독 주제</h3>
-<p><code>accounts.update#${mode}</code></p>
-
-<p>다음 계정 변경 푸쉬 방법 중에서 임의로 선택 가능합니다.</p>
+<p>구독 계정에서 주문 업데이트</p>
+<h3 id='0c2caccf73-14'>구독 주제</h3><pre class="highlight plaintext"><code>accounts.update#${mode}
+</code></pre>
+<p>다음 계정 변경 푸시 방법 중에서 임의로 선택 가능합니다.</p>
 
 <ol>
-<li>계정 잔액에 변동이 있을 경우에만 푸쉬 합니다;</li>
-<li>계정 잔액에 변동이 있거나 사용 가능한 잔액이 변동되는 경우 푸쉬 하고 별개로 푸쉬합니다.</li>
+<li>계정 잔액에 변동이 있을 경우에만 푸시합니다.</li>
+<li>계정 잔액에 변동이 있거나 사용 가능한 잔액이 변동되는 경우 푸시하고 별개로 푸시합니다.</li>
 </ol>
-<h3 id='ea6eed63c9-2'>구독 매개 변수</h3>
+<h3 id='ea6eed63c9'>구독 매개 변수</h3>
 <table><thead>
 <tr>
 <th>매개 변수</th>
@@ -8197,7 +8937,7 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <tr>
 <td>mode</td>
 <td>integer</td>
-<td>푸쉬 방식, 유효값: 0, 1. 기본값: 0</td>
+<td>푸시 방식, 유효값: 0, 1. 기본값: 0</td>
 </tr>
 </tbody></table>
 
@@ -8205,14 +8945,16 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 
 <p>1.mode 요청하지 않음:
 accounts.update 
-계정 잔액이 변동 있는 경우에만 푸쉬;
+계정 잔액이 변동 있는 경우에만 푸시;
 2.mode=0으로 요청:
 accounts.update#0 </p>
 
-<p>계정 잔액에 변동 있는 경우에만 푸쉬;
+<p>계정 잔액에 변동 있는 경우에만 푸시;
 3.mode=1으로 요청：<br>
 accounts.update#1<br>
-계정 잔액에 변동 있거나 사용 가능한 잔액에 변동이 생기는 경우 푸쉬하고 별개로 푸쉬;  </p>
+계정 잔액에 변동이 있거나 사용 가능한 잔액에 변동이 생기는 경우 푸시하고 별개로 푸시;  </p>
+
+<p>주의: 유저의 구독 모드에 관계없이 구독 성공 후, 서버는 우선 현재 각 계정의 계정잔액과 사용가능 잔액을 푸시하고 그다음 계정 업그레이드를 푸시 합니다. 처음 각 계정 초기값을 푸시하는 경우 메시지에 changeType과 changeTime 값은 null 입니다.</p>
 
 <blockquote>
 <p>Subscribe request</p>
@@ -8274,7 +9016,7 @@ accounts.update#1<br>
     </span><span class="s2">"changeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574393385122</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='43da461ca4-7'>데이터 업데이트 필드 리스트</h3>
+</span></code></pre><h3 id='43da461ca4-6'>데이터 업데이트 필드 리스트</h3>
 <table><thead>
 <tr>
 <th>매개 변수</th>
@@ -8295,17 +9037,17 @@ accounts.update#1<br>
 <tr>
 <td>balance</td>
 <td>string</td>
-<td>계정 잔액(계정 잔액에 변동이 있는 경우에만 푸쉬)</td>
+<td>계정 잔액(계정 잔액에 변동이 있는 경우에만 푸시)</td>
 </tr>
 <tr>
 <td>available</td>
 <td>string</td>
-<td>사용 가능 잔액(사용 가능 잔액이 변화 되는 경우에만 푸쉬)</td>
+<td>사용 가능 잔액(사용 가능 잔액이 변화 되는 경우에만 푸시)</td>
 </tr>
 <tr>
 <td>changeType</td>
 <td>string</td>
-<td>잔액 변동 유형, 유효값: order-place(주문서 생성)，order-match(주문서 체결), order-refund(주문서 체결 환불)，order-cancel(주문 철회), order-fee-refund(거래 수수료를 수수료 쿠폰로 삭감)，other(기타 자산 변동)</td>
+<td>잔액 변동 유형, 유효값: order-place(주문서 생성)，order-match(주문서 체결), order-refund(주문서 체결 환불)，order-cancel(주문 철회), order-fee-refund(거래 수수료를 수수료 쿠폰으로 삭감)，other(기타 자산 변동)</td>
 </tr>
 <tr>
 <td>accountType</td>
@@ -8318,6 +9060,9 @@ accounts.update#1<br>
 <td>잔액 변동 시간, unix time in millisecond</td>
 </tr>
 </tbody></table>
+
+<p>주의:<br>
+계정 업그레이드는 입금 금액을 푸시 합니다, 여러 개 체결로 생성한 페이백은 통합하여 입금될 수 있습니다.<br></p>
 
 <p><br>
 <br>
