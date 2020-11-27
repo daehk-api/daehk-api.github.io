@@ -495,7 +495,10 @@
                     <a href="#genral" class="toc-h2 toc-link" data-title="Genral">Genral</a>
                   </li>
                   <li>
-                    <a href="#subscribe-trade-details-post-clearing" class="toc-h2 toc-link" data-title="Subscribe Trade Details post Clearing">Subscribe Trade Details post Clearing</a>
+                    <a href="#subscribe-order-updates" class="toc-h2 toc-link" data-title="Subscribe Order Updates">Subscribe Order Updates</a>
+                  </li>
+                  <li>
+                    <a href="#subscribe-trade-details-amp-order-cancellation-post-clearing" class="toc-h2 toc-link" data-title="Subscribe Trade Details &amp; Order Cancellation post Clearing">Subscribe Trade Details &amp; Order Cancellation post Clearing</a>
                   </li>
                   <li>
                     <a href="#subscribe-account-change" class="toc-h2 toc-link" data-title="Subscribe Account Change">Subscribe Account Change</a>
@@ -504,7 +507,7 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://www.huobi.pro/apikey/'>Sign Up for a Huobi Korea API key </a></li>
+            <li><a href='https://www.huobi.kr/zh-cn/api/'>Sign Up for a Huobi Korea API key </a></li>
             <li>Login is required for creating an API key</li>
         </ul>
     </div>
@@ -805,30 +808,6 @@ The 'timestamp' should be formated as 'YYYY-MM-DDThh:mm:ss' and URI encoded.
 <td><a href="#e227a2a3e8">POST /v1/futures/transfer</a></td>
 <td>Transfer with future account</td>
 </tr>
-<tr>
-<td><a href="#0d3c2e7382">POST /v1/dw/transfer-in/margin</a></td>
-<td>Transfer from spot to margin account</td>
-</tr>
-<tr>
-<td><a href="#0d3c2e7382">POST /v1/dw/transfer-out/margin</a></td>
-<td>Transfer from margin to spot account</td>
-</tr>
-<tr>
-<td><a href="#48cca1ce88">POST /v1/margin/orders</a></td>
-<td>Request margin loan</td>
-</tr>
-<tr>
-<td><a href="#48aa7c8199">POST /v1/margin/orders/{order-id}/repay</a></td>
-<td>Repay the debit for specific order</td>
-</tr>
-<tr>
-<td><a href="#e52396720a">GET /v1/margin/loan-orders</a></td>
-<td>Query history loan orders</td>
-</tr>
-<tr>
-<td><a href="#6e79ba8e80">GET /v1/margin/accounts/balance</a></td>
-<td>Query margin account balance</td>
-</tr>
 </tbody></table>
 
 <aside class="notice">
@@ -846,7 +825,6 @@ The types include:</p>
 
 <ul>
 <li>spot: Spot account</li>
-<li>otc: OTC account</li>
 <li>point: Point card account</li>
 </ul>
 <h3 id='identity'>Identity</h3>
@@ -911,16 +889,6 @@ The types include:</p>
 <td>Order</td>
 <td>/v1/order/*</td>
 <td>Order interface, including order creation, cancellation, query, etc</td>
-</tr>
-<tr>
-<td>Margin</td>
-<td>/v1/margin/*</td>
-<td>Margin interface, including debit, payment, query, etc</td>
-</tr>
-<tr>
-<td>Cross Margin</td>
-<td>/v1/cross-margin/*</td>
-<td>Cross margin interface, including debit, payment, query, etc</td>
 </tr>
 </tbody></table>
 
@@ -1227,7 +1195,6 @@ Each user could create up to 200 sub users, and each sub user could create 5 API
 
 <ul>
 <li>spot: Spot account</li>
-<li>otc: OTC account</li>
 <li>point: Point card account</li>
 </ul>
 <h3 id='q2-what-is-client-order-id'>Q2：What is client-order-id?</h3>
@@ -2575,13 +2542,7 @@ In order to better understand your question and respond you quickly, please use 
 <td>type</td>
 <td>string</td>
 <td>The type of this account</td>
-<td>spot, margin, otc, point, super-margin</td>
-</tr>
-<tr>
-<td>subtype</td>
-<td>string</td>
-<td>The type of sub account (applicable only for isolated margin accout)</td>
-<td>The corresponding trading symbol (currency pair) the isolated margin is based on, e.g. btcusdt</td>
+<td>spot, point</td>
 </tr>
 </tbody></table>
 <h2 id='get-account-balance-of-a-specific-account'>Get Account Balance of a Specific Account</h2>
@@ -2647,7 +2608,7 @@ In order to better understand your question and respond you quickly, please use 
 <td>type</td>
 <td>string</td>
 <td>The type of this account</td>
-<td>spot, margin, otc, point, super-margin</td>
+<td>spot,  point</td>
 </tr>
 <tr>
 <td>list</td>
@@ -2980,7 +2941,7 @@ In order to better understand your question and respond you quickly, please use 
 <tr>
 <td>type</td>
 <td>string</td>
-<td>account type (spot, margin, point)</td>
+<td>account type (spot, point)</td>
 </tr>
 <tr>
 <td>balance</td>
@@ -3062,7 +3023,7 @@ In order to better understand your question and respond you quickly, please use 
 <td>type</td>
 <td>string</td>
 <td>The type of this account</td>
-<td>spot, margin, otc, point</td>
+<td>spot, point</td>
 </tr>
 <tr>
 <td>list</td>
@@ -3579,21 +3540,21 @@ In order to better understand your question and respond you quickly, please use 
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24383070</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deposit"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"chain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdterc20"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"tx-hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16382690"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.000000000000000000</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x138d709030b4e096044d371a27efc5c562889b9b"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"address-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"safe"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571303815800</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571303815826</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24383070</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deposit"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"chain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdterc20"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tx-hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16382690"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.000000000000000000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x138d709030b4e096044d371a27efc5c562889b9b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"address-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"safe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created-at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571303815800</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated-at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571303815826</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='response-content-21'>Response Content</h3>
 <table><thead>
@@ -3822,8 +3783,8 @@ In order to better understand your question and respond you quickly, please use 
 <td>string</td>
 <td>false</td>
 <td>api</td>
-<td>When trade with margin use &#39;margin-api&#39;; When trade with super-margin use &#39;super-margin-api&#39;;</td>
-<td>api, margin-api,super-margin-api</td>
+<td></td>
+<td>api</td>
 </tr>
 <tr>
 <td>client-order-id</td>
@@ -7410,29 +7371,29 @@ While type is set as ‘step1’, ‘step2’, ‘step3’, ‘step4’, or ‘s
 
 <p><strong><code>wss://api-cloud.huobi.co.kr/ws/v2</code></strong>  </p>
 
-<p><strong><code>wss://api-aws.huobi.pro/ws/v2</code></strong>   </p>
-
 <p>Note: 
 By comparing to api-cloud.huobi.co.kr, the network latency to api-aws.huobi.pro is lower, for those client&#39;s servers locating at AWS.</p>
 <h3 id='message-compression'>Message Compression</h3>
-<p>None.</p>
+<p>Different with v1, the return data of websocket v2 are not compressed.</p>
 <h3 id='heartbeat'>Heartbeat</h3>
 <p>Once the Websocket connection is established, Huobi server will periodically send &quot;ping&quot; message at 20s interval, with an integer inside.</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1575537778295</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+  </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1575537778295</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Once client&#39;s server receives &quot;ping&quot;, it should respond &quot;pong&quot; message back with the same integer.</p>
+<p>Once the Websocket connection is established, Huobi server will periodically send &quot;ping&quot; message at 20s interval, with an integer inside.</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ping"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="mi">1575537778295</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">same</span><span class="w"> </span><span class="err">integer</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="s2">"ping"</span><span class="w"> </span><span class="err">message</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='valid-values-of-action'>Valid Values of <code>action</code></h3>
+</span></code></pre>
+<p>Once client&#39;s server receives &quot;ping&quot;, it should respond &quot;pong&quot; message back with the same integer.</p>
+<h3 id='valid-values-of-action'>Valid Values of <code>action</code></h3>
 <table><thead>
 <tr>
 <th>Valid Values</th>
@@ -7456,6 +7417,14 @@ By comparing to api-cloud.huobi.co.kr, the network latency to api-aws.huobi.pro 
 <td>Push (from Huobi server to client&#39;s server)</td>
 </tr>
 </tbody></table>
+<h3 id='rate-limit-2'>Rate Limit</h3>
+<p>There are multiple limitations for this version:</p>
+
+<ul>
+<li>The limitation of single connection for <strong>valid</strong> request (including req, sub, unsub, not including ping/pong or other invalid request) is <strong>50 per second</strong>. It will return &quot;too many request&quot; when the limit is exceeded.</li>
+<li>The limitation of single API Key is <strong>10</strong>. It will return &quot;too many connection&quot; when the limit is exceeded.</li>
+<li>The limitation of single IP is <strong>100 per second</strong>. It will return &quot;too many request&quot; when the limitation is exceeded.</li>
+</ul>
 <h3 id='authentication-3'>Authentication</h3>
 <p>Authentication request:</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -7474,10 +7443,10 @@ By comparing to api-cloud.huobi.co.kr, the network latency to api-aws.huobi.pro 
 </span></code></pre>
 <p>The response of success</p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"req"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+  </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"req"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Authentication request field list</p>
@@ -7548,48 +7517,176 @@ By comparing to api-cloud.huobi.co.kr, the network latency to api-aws.huobi.pro 
 <li>The valid value of signatureVersion is 2.1.</li>
 </ol>
 
-<p>Please refer to detailed signature generation steps from: [https://huobiapi.github.io/docs/spot/v1/cn/#c64cd15fdc]</p>
+<p>Please refer to detailed signature generation steps from: [https://alphaex-api.github.io/openapi/spot/v1/en/#authentication]</p>
 
 <p>The final string involved in signature generation should be like below:</p>
 <pre class="highlight plaintext"><code>GET\n
 api-cloud.huobi.co.kr\n
 /ws/v2\n
 accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;signatureVersion=2.1&amp;timestamp=2019-12-05T11%3A53%3A03
-</code></pre><h3 id='subscribe-a-topic-to-continuously-receive-updates'>Subscribe a Topic to Continuously Receive Updates</h3>
-<p>Once the Websocket connection is established, Websocket client could send following request to subscribe a topic:</p>
+</code></pre>
+<p>The final string involved in signature generation should be like below:</p>
+
+<p>Note: The data in JSON request doesn&#39;t require URL encode</p>
+<h3 id='subscribe-a-topic-to-continuously-receive-updates'>Subscribe a Topic to Continuously Receive Updates</h3>
+<blockquote>
+<p>Sub request:</p>
+</blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts.update"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Upon success, Websocket client should receive a response below:</p>
+<p>Once the Websocket connection is established, Websocket client could send following request to subscribe a topic:</p>
+
+<blockquote>
+<p>Sub respose:</p>
+</blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
     </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accounts.update#0"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-an-update'>Request an Update</h3>
-<p>Once the Websocket connection is established, Websocket client could send following request to acquire an update:</p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"req"</span><span class="p">,</span><span class="w"> 
-    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"topic"</span><span class="p">,</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Upon success, Websocket client should receive a response below:</p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"req"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"topic"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">update</span><span class="w"> </span><span class="err">contents</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='subscribe-trade-details-post-clearing'>Subscribe Trade Details post Clearing</h2>
+
+<p>Below is the return code, return message and the description returend from Asset and Order WebSocket</p>
+
+<table><thead>
+<tr>
+<th>Return Code</th>
+<th>Return Message</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Success</td>
+<td>Successful</td>
+</tr>
+<tr>
+<td>100</td>
+<td>time out close</td>
+<td>The connection is timeout and closed</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>The request is invalid</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>The service is not found</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests</td>
+<td>Connection number exceed limit</td>
+</tr>
+<tr>
+<td>500</td>
+<td>system error</td>
+<td>System internal error</td>
+</tr>
+<tr>
+<td>2000</td>
+<td>invalid.ip</td>
+<td>The IP is invalid</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>nvalid.json</td>
+<td>The JSON request is invalid</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.action</td>
+<td>Parameter action is invalid</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.symbol</td>
+<td>Parameter symbol is invalid</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>invalid.ch</td>
+<td>Parameter channel is invalid</td>
+</tr>
+<tr>
+<td>2001</td>
+<td>missing.param.auth</td>
+<td>Parameter auth is missing</td>
+</tr>
+<tr>
+<td>2002</td>
+<td>invalid.auth.state</td>
+<td>Authentication state is invalid</td>
+</tr>
+<tr>
+<td>2002</td>
+<td>auth.fail</td>
+<td>Authentication failed</td>
+</tr>
+<tr>
+<td>2003</td>
+<td>query.account.list.error</td>
+<td>Account query error</td>
+</tr>
+<tr>
+<td>4000</td>
+<td>too.many.request</td>
+<td>Request exceed limit</td>
+</tr>
+<tr>
+<td>4000</td>
+<td>too.many.connection</td>
+<td>Connection number exceed limit for single API Key</td>
+</tr>
+</tbody></table>
+<h2 id='subscribe-order-updates'>Subscribe Order Updates</h2>
 <p>API Key Permission: Read</p>
 
-<p>The topic updates trade details including transaction fee and transaction fee deduction etc. It only updates when transaction occurs.</p>
+<p>An order update can be triggered by any of following:<br></p>
+
+<ul>
+<li>Conditional order triggering failure (eventType=trigger)<br></li>
+<li>Conditional order cancellation before trigger (eventType=deletion)<br></li>
+<li>Order creation (eventType=creation)<br></li>
+<li>Order matching (eventType=trade)<br></li>
+<li>Order cancellation (eventType=cancellation)<br></li>
+</ul>
+
+<p>The field list in order update message can be various per event type, developers can design the data structure in either of two ways:<br></p>
+
+<ul>
+<li>Define a data structure including fields for all event types, allowing a few of them null<br></li>
+<li>Define different data structure for each event type to include specific fields, inheriting from a common data structure which has common fields</li>
+</ul>
 <h3 id='topic-9'>Topic</h3>
-<p><code>trade.clearing#${symbol}</code></p>
-<h3 id='subscription-field'>Subscription Field</h3>
+<p><code>orders#${symbol}</code></p>
+
+<blockquote>
+<p>Subscribe request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders#btcusdt"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='subscription-field'>Subscription Field</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -7603,13 +7700,428 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <td>Trading symbol (wildcard * is allowed)</td>
 </tr>
 </tbody></table>
+<h3 id='update-content-9'>Update Content</h3><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"orderSide"</span><span class="p">:</span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastActTime"</span><span class="p">:</span><span class="mi">1583853365586</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"rejected"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"trigger"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"errCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">2002</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"errMessage"</span><span class="p">:</span><span class="s2">"invalid.client.order.id (NT)"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>After conditional order triggering failure –</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>Event type, valid value: trigger (only applicable for conditional order)</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading symbol</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>Client order ID</td>
+</tr>
+<tr>
+<td>orderSide</td>
+<td>string</td>
+<td>Order side, valid value: buy, sell</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>Order status, valid value: rejected</td>
+</tr>
+<tr>
+<td>errCode</td>
+<td>int</td>
+<td>Error code for triggering failure</td>
+</tr>
+<tr>
+<td>errMessage</td>
+<td>string</td>
+<td>Error message for triggering failure</td>
+</tr>
+<tr>
+<td>lastActTime</td>
+<td>long</td>
+<td>Order trigger time</td>
+</tr>
+</tbody></table>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"orderSide"</span><span class="p">:</span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastActTime"</span><span class="p">:</span><span class="mi">1583853365586</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"deletion"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>After conditional order being cancelled before triggering –</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>Event type, valid value: deletion (only applicable for conditional order)</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading symbol</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>Client order ID</td>
+</tr>
+<tr>
+<td>orderSide</td>
+<td>string</td>
+<td>Order side, valid value: buy, sell</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>Order status, valid value: canceled</td>
+</tr>
+<tr>
+<td>lastActTime</td>
+<td>long</td>
+<td>Order trigger time</td>
+</tr>
+</tbody></table>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"orderSize"</span><span class="p">:</span><span class="s2">"2.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderCreateTime"</span><span class="p">:</span><span class="mi">1583853365586</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"accountld"</span><span class="p">:</span><span class="mi">992701</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderPrice"</span><span class="p">:</span><span class="s2">"77.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"sell-limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="mi">27163533</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"submitted"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"creation"</span><span class="w">
+
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>After order is submitted –</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>Event type, valid value: creation</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading symbol</td>
+</tr>
+<tr>
+<td>accountId</td>
+<td>long</td>
+<td>account ID</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>long</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>Client order ID (if any)</td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>string</td>
+<td>Order price</td>
+</tr>
+<tr>
+<td>orderSize</td>
+<td>string</td>
+<td>Order size (inapplicable for market buy order)</td>
+</tr>
+<tr>
+<td>orderValue</td>
+<td>string</td>
+<td>Order value (only applicable for market buy order)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>Order status, valid value: submitted</td>
+</tr>
+<tr>
+<td>orderCreateTime</td>
+<td>long</td>
+<td>Order creation time</td>
+</tr>
+</tbody></table>
+
+<p>Note:<br></p>
+
+<ul>
+<li>If a stop limit order is created but not yet triggered, the topic won’t send an update.<br></li>
+<li>The topic will send creation update for taker&#39;s order before it being filled.<br></li>
+<li>Stop limit order&#39;s type is no longer as “buy-stop-limit” or “sell-stop-limit”, but changing to “buy-limit” or “sell-limit”.<br></li>
+</ul>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"tradePrice"</span><span class="p">:</span><span class="s2">"76.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeVolume"</span><span class="p">:</span><span class="s2">"1.013157894736842100"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="mi">301</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tradeTime"</span><span class="p">:</span><span class="mi">1583854188883</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"aggressor"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remainAmt"</span><span class="p">:</span><span class="s2">"0.000000000000000400000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="mi">27163536</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"sell-limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"filled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"trade"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>After order matching –</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>Event type, valid value: trade</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading symbol</td>
+</tr>
+<tr>
+<td>tradePrice</td>
+<td>string</td>
+<td>Trade price</td>
+</tr>
+<tr>
+<td>tradeVolume</td>
+<td>string</td>
+<td>Trade volume</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>long</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>Client order ID (if any)</td>
+</tr>
+<tr>
+<td>tradeId</td>
+<td>long</td>
+<td>Trade ID</td>
+</tr>
+<tr>
+<td>tradeTime</td>
+<td>long</td>
+<td>Trade time</td>
+</tr>
+<tr>
+<td>aggressor</td>
+<td>bool</td>
+<td>Aggressor or not, valid value: true (taker), false (maker)</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>Order status, valid value: partial-filled, filled</td>
+</tr>
+<tr>
+<td>remainAmt</td>
+<td>string</td>
+<td>Remaining amount (for buy-market order it&#39;s remaining value)</td>
+</tr>
+</tbody></table>
+
+<p>Note:<br></p>
+
+<ul>
+<li>Stop limit order&#39;s type is no longer as “buy-stop-limit” or “sell-stop-limit”, but changing to “buy-limit” or “sell-limit”.<br></li>
+<li>If a taker’s order matching with multiple orders at opposite side simultaneously, the multiple trades will be disseminated over separately instead of merging into one trade.<br></li>
+</ul>
+
+<blockquote>
+<p>Update example</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"action"</span><span class="p">:</span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="s2">"orders#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"lastActTime"</span><span class="p">:</span><span class="mi">1583853475406</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remainAmt"</span><span class="p">:</span><span class="s2">"2.000000000000000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderId"</span><span class="p">:</span><span class="mi">27163533</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"sell-limit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"symbol"</span><span class="p">:</span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"eventType"</span><span class="p">:</span><span class="s2">"cancellation"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>After order cancellation –</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>Event type, valid value: cancellation</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading symbol</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>long</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>Client order ID (if any)</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>Order status, valid value: partial-canceled, canceled</td>
+</tr>
+<tr>
+<td>remainAmt</td>
+<td>string</td>
+<td>Remaining amount  (for buy-market order it&#39;s remaining value)</td>
+</tr>
+<tr>
+<td>lastActTime</td>
+<td>long</td>
+<td>Last activity time</td>
+</tr>
+</tbody></table>
+
+<p>Note:<br></p>
+
+<ul>
+<li>Stop limit order&#39;s type is no longer as “buy-stop-limit” or “sell-stop-limit”, but changing to “buy-limit” or “sell-limit”.<br></li>
+</ul>
+<h2 id='subscribe-trade-details-amp-order-cancellation-post-clearing'>Subscribe Trade Details &amp; Order Cancellation post Clearing</h2>
+<p>API Key Permission: Read</p>
+
+<p>Only update when order transaction or cancellation. Order transaction update is in tick by tick mode, which means, if a taker’s order matches with multiple maker’s orders, the simultaneous multiple trades will be disseminated one by one. But, the update sequence of the multiple trades, may not be exactly same with the sequence of the transactions made. Also, if an order is auto cancelled immediately just after its partial fills, for example a typical IOC order, this channel would be possibly disseminate the cancellation update first prior to the trade. <br></p>
+
+<p>If user willing to receive order updates in exact same sequence with the original happening, it is recommended to subscribe order update channel orders#${symbol}.<br></p>
+<h3 id='topic-10'>Topic</h3>
+<p><code>trade.clearing#${symbol}#${mode}</code></p>
+<h3 id='subscription-field-2'>Subscription Field</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading symbol (wildcard * is allowed)</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>int</td>
+<td>Subscription mode (0 – subscribe only trade event; 1 – subscribe both trade and cancellation events; default value: 0)</td>
+</tr>
+</tbody></table>
+
+<p>Note:<br>
+About optional field ‘mode’: If not filled, or filled with 0, it implicates to subscribe trade event only. If filled with 1, it implicates to subscribe both trade and cancellation events.<br></p>
 
 <blockquote>
 <p>Subscribe request</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt"</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt#0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -7619,7 +8131,7 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt#0"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -7627,8 +8139,9 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <p>Update example</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade.clearing#btcusdt#0"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="s2">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trade"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btcusdt"</span><span class="p">,</span><span class="w">
          </span><span class="s2">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">99998888</span><span class="p">,</span><span class="w">
          </span><span class="s2">"tradePrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9999.99"</span><span class="p">,</span><span class="w">
@@ -7638,11 +8151,19 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
          </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">919219323232</span><span class="p">,</span><span class="w">
          </span><span class="s2">"tradeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">998787897878</span><span class="p">,</span><span class="w">
          </span><span class="s2">"transactFee"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.88"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">" feeDeduct "</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">" feeDeductType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+         </span><span class="s2">"feeDeduct "</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"feeDeductType"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"accountId"</span><span class="p">:</span><span class="w"> </span><span class="mi">9912791</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"spot-api"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10000"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a001"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderCreateTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">998787897878</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"orderStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"partial-filled"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='update-contents'>Update Contents</h3>
+</span></code></pre><h3 id='update-contents-after-order-matching'>Update Contents (after order matching)</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -7650,6 +8171,11 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>Event type (trade)</td>
+</tr>
 <tr>
 <td>symbol</td>
 <td>string</td>
@@ -7673,7 +8199,7 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <tr>
 <td>orderSide</td>
 <td>string</td>
-<td>Order side, valid value: buy,sell</td>
+<td>Order side, valid value: buy, sell</td>
 </tr>
 <tr>
 <td>orderType</td>
@@ -7698,7 +8224,12 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <tr>
 <td>transactFee</td>
 <td>string</td>
-<td>Transaction fee</td>
+<td>Transaction fee (positive value) or Transaction rebate (negative value)</td>
+</tr>
+<tr>
+<td>feeCurrency</td>
+<td>string</td>
+<td>Currency of transaction fee or transaction fee rebate (transaction fee of buy order is based on base currency, transaction fee of sell order is based on quote currency; transaction fee rebate of buy order is based on quote currency, transaction fee rebate of sell order is based on base currency)</td>
 </tr>
 <tr>
 <td>feeDeduct</td>
@@ -7708,14 +8239,159 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <tr>
 <td>feeDeductType</td>
 <td>string</td>
-<td>Transaction fee deduction type, valid value: ht,point</td>
+<td>Transaction fee deduction type, valid value: ht, point</td>
+</tr>
+<tr>
+<td>accountId</td>
+<td>long</td>
+<td>Account ID</td>
+</tr>
+<tr>
+<td>source</td>
+<td>string</td>
+<td>Order source</td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>string</td>
+<td>Order price (invalid for market order)</td>
+</tr>
+<tr>
+<td>orderSize</td>
+<td>string</td>
+<td>Order size (invalid for market buy order)</td>
+</tr>
+<tr>
+<td>orderValue</td>
+<td>string</td>
+<td>Order value (only valid for market buy order)</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>Client order ID</td>
+</tr>
+<tr>
+<td>stopPrice</td>
+<td>string</td>
+<td>Stop price (only valid for stop limit order)</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>string</td>
+<td>Operation character (only valid for stop limit order)</td>
+</tr>
+<tr>
+<td>orderCreateTime</td>
+<td>long</td>
+<td>Order creation time</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>Order status, valid value: filled, partial-filled</td>
+</tr>
+</tbody></table>
+
+<p>Notes:<br></p>
+
+<ul>
+<li>The calculated maker rebate value inside ‘transactFee’ would not be paid immediately.<br></li>
+</ul>
+<h3 id='update-contents-after-order-cancellation'>Update Contents (after order cancellation)</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>eventType</td>
+<td>string</td>
+<td>Event type (cancellation)</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Trading symbol</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>long</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>orderSide</td>
+<td>string</td>
+<td>Order side, valid value: buy, sell</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>string</td>
+<td>Order type, valid value: buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit</td>
+</tr>
+<tr>
+<td>accountId</td>
+<td>long</td>
+<td>Account ID</td>
+</tr>
+<tr>
+<td>source</td>
+<td>string</td>
+<td>Order source</td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>string</td>
+<td>Order price (invalid for market order)</td>
+</tr>
+<tr>
+<td>orderSize</td>
+<td>string</td>
+<td>Order size (invalid for market buy order)</td>
+</tr>
+<tr>
+<td>orderValue</td>
+<td>string</td>
+<td>Order value (only valid for market buy order)</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>string</td>
+<td>Client order ID</td>
+</tr>
+<tr>
+<td>stopPrice</td>
+<td>string</td>
+<td>Stop price (only valid for stop limit order)</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>string</td>
+<td>Operation character (only valid for stop limit order)</td>
+</tr>
+<tr>
+<td>orderCreateTime</td>
+<td>long</td>
+<td>Order creation time</td>
+</tr>
+<tr>
+<td>remainAmt</td>
+<td>string</td>
+<td>Remaining order amount (if market buy order, it implicates remaining order value)</td>
+</tr>
+<tr>
+<td>orderStatus</td>
+<td>string</td>
+<td>Order status, valid value: canceled, partial-canceled</td>
 </tr>
 </tbody></table>
 <h2 id='subscribe-account-change'>Subscribe Account Change</h2>
 <p>API Key Permission: Read</p>
 
 <p>The topic updates account change details.</p>
-<h3 id='topic-10'>Topic</h3>
+<h3 id='topic-11'>Topic</h3>
 <p><code>accounts.update#${mode}</code></p>
 
 <p>Upon subscription field value specified, the update can be triggered by either of following events:</p>
@@ -7723,7 +8399,7 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&amp;signatureMethod=HmacSHA256&amp;
 <p>1、Whenever account balance is changed.</p>
 
 <p>2、Whenever account balance or available balance is changed. (Update separately.)</p>
-<h3 id='subscription-field-2'>Subscription Field</h3>
+<h3 id='subscription-field-3'>Subscription Field</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -7748,6 +8424,9 @@ Only update when account balance changed;<br>
 3、Specify &quot;mode&quot; as 1:<br>
 accounts.update#1<br>
 Update when either account balance changed or available balance changed.  </p>
+
+<p>Note:
+The topic disseminates the current static value of individual accounts first, at the beginning of subscription, followed by account change updates. While disseminating the current static value of individual accounts, inside the message, field value of &quot;changeType&quot; and &quot;changeTime&quot; is null.</p>
 
 <blockquote>
 <p>Subscribe request</p>
@@ -7809,7 +8488,7 @@ Update when either account balance changed or available balance changed.  </p>
         </span><span class="s2">"changeTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1574393385122</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='update-contents-2'>Update Contents</h3>
+</span></code></pre><h3 id='update-contents'>Update Contents</h3>
 <table><thead>
 <tr>
 <th>Field</th>
@@ -7840,7 +8519,7 @@ Update when either account balance changed or available balance changed.  </p>
 <tr>
 <td>changeType</td>
 <td>string</td>
-<td>Change type, valid value: order-place,order-match,order-refund,order-cancel,order-fee-refund,margin-transfer,margin-loan,margin-interest,margin-repay,other,</td>
+<td>Change type, valid value: order-place,order-match,order-refund,order-cancel,order-fee-refund,other,deposit,withdraw</td>
 </tr>
 <tr>
 <td>accountType</td>
@@ -7853,6 +8532,12 @@ Update when either account balance changed or available balance changed.  </p>
 <td>Change time, unix time in millisecond</td>
 </tr>
 </tbody></table>
+
+<p>Note:<br></p>
+
+<ul>
+<li>A maker rebate would be paid in batch mode for multiple trades.<br></li>
+</ul>
 
       </div>
       <div class="dark-box">
