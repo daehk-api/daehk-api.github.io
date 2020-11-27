@@ -326,7 +326,6 @@ account-id可通过/v1/account/accounts接口获取，并根据account-type区�
 账户类型包括：   
 
 * spot：现货账户  
-* otc：OTC账户  
 * point：点卡账户  
 
 ### 订单、成交相关ID说明  
@@ -598,7 +597,6 @@ A： account-id对应用户不同业务账户的ID，可通过/v1/account/accoun
 账户类型包括：
 
 - spot 现货账户  
-- otc OTC账户  
 - point 点卡账户  
 
 
@@ -1403,29 +1401,17 @@ API Key 权限：读取
       "subtype": "",
       "state": "working"
     }
-    {
-      "id": 100002,
-      "type": "margin",
-      "subtype": "btcusdt",
-      "state": "working"
-    },
-    {
-      "id": 100003,
-      "type": "otc",
-      "subtype": "",
-      "state": "working"
-    }
   ]
 }
 ```
 
 ### 响应数据
 
-| 参数名称 | 是否必须 | 数据类型 | 描述                               | 取值范围                                                     |
-| -------- | -------- | -------- | ---------------------------------- | ------------------------------------------------------------ |
-| id       | true     | long     | account-id                         |                                                              |
-| state    | true     | string   | 账户状态                           | working：正常, lock：账户被锁定                              |
-| type     | true     | string   | 账户类型                           | spot：现货账户，otc：OTC 账户，point：点卡账户 |
+| 参数名称 | 是否必须 | 数据类型 | 描述       | 取值范围                        |
+| -------- | -------- | -------- | ---------- | ------------------------------- |
+| id       | true     | long     | account-id |                                 |
+| state    | true     | string   | 账户状态   | working：正常, lock：账户被锁定 |
+| type     | true     | string   | 账户类型   | spot：现货账户，point：点卡账户 |
 
 
 ## 账户余额
@@ -1434,7 +1420,7 @@ API Key 权限：读取
 
 查询指定账户的余额，支持以下账户：
 
-spot：现货账户，otc：OTC 账户，point：点卡账户
+spot：现货账户，point：点卡账户
 
 ### HTTP 请求
 
@@ -1472,12 +1458,12 @@ spot：现货账户，otc：OTC 账户，point：点卡账户
 
 ### 响应数据
 
-| 参数名称 | 是否必须 | 数据类型 | 描述     | 取值范围                                                     |
-| -------- | -------- | -------- | -------- | ------------------------------------------------------------ |
-| id       | true     | long     | 账户 ID  |                                                              |
-| state    | true     | string   | 账户状态 | working：正常  lock：账户被锁定                              |
-| type     | true     | string   | 账户类型 | spot：现货账户， otc：OTC 账户，point：点卡账户 |
-| list     | false    | Array    |          |                                                              |
+| 参数名称 | 是否必须 | 数据类型 | 描述     | 取值范围                        |
+| -------- | -------- | -------- | -------- | ------------------------------- |
+| id       | true     | long     | 账户 ID  |                                 |
+| state    | true     | string   | 账户状态 | working：正常  lock：账户被锁定 |
+| type     | true     | string   | 账户类型 | spot：现货账户，point：点卡账户 |
+| list     | false    | Array    |          |                                 |
 
 list字段说明
 
@@ -4136,7 +4122,6 @@ API Key 权限：读取
 | stop-price         | string   | 止盈止损订单触发价格         |      |
 | operator           | string   | 止盈止损订单触发价运算符     |      |
 
-
 # Websocket资产及订单（v2）
 
 ## 简介
@@ -4147,9 +4132,11 @@ API Key 权限：读取
 
 **`wss://api-cloud.huobi.co.kr/ws/v2`**  
 
+请使用中国大陆以外的服务器访问火币 API。
+
 ### 数据压缩
 
-无
+与v1版本不同，v2版本返回的数据未进行 GZIP 压缩。
 
 ### 心跳消息
 
@@ -4157,10 +4144,10 @@ API Key 权限：读取
 
 ```json
 {
-  "action": "ping",
-  "data": {
-    "ts": 1575537778295
-  }
+	"action": "ping",
+	"data": {
+		"ts": 1575537778295
+	}
 }
 ```
 
@@ -4168,7 +4155,7 @@ API Key 权限：读取
 
 ```json
 {
-    "action": "ping",
+    "action": "pong",
     "data": {
           "ts": 1575537778295 // 使用Ping消息中的ts值
     }
@@ -4184,6 +4171,14 @@ API Key 权限：读取
 | ping、pong | 心跳数据                             |
 | push       | 推送数据，服务端发送至客户端数据类型 |
 
+### 限频
+
+此版本对用户采取了多维度的限频策略，具体策略如下：
+
+- 限制单连接**有效**的请求（包括req，sub，unsub，不包括ping/pong和其他无效请求)为**50次/秒**（此处秒限制为滑动窗口）。当超过此限制时，会返回"too many request"错误消息。
+- 限制单API Key建连总数为**10**。当超过此限制时，会返回"too many connection"错误消息。
+- 限制单IP建立连接数为**100次/秒**。当超过次限制时，会返回"too many request"错误消息。
+
 ### 鉴权
 
 鉴权请求格式如下：
@@ -4194,11 +4189,11 @@ API Key 权限：读取
     "ch": "auth",
     "params": { 
         "authType":"api",
-        "accessKey": "sffd-ddfd-dfdsaf-dfdsafsd",
+        "accessKey": "e2xxxxxx-99xxxxxx-84xxxxxx-7xxxx",
         "signatureMethod": "HmacSHA256",
         "signatureVersion": "2.1",
         "timestamp": "2019-09-01T18:16:16",
-        "signature": "safsfdsjfljljdfsjfsjfsdfhsdkjfhklhsdlkfjhlksdfh"
+        "signature": "4F65x5A2bLyMWVQj3Aqp+B4w+ivaA7n5Oi2SuYtCJ9o="
     }
 }
 
@@ -4208,10 +4203,10 @@ API Key 权限：读取
 
 ```json
 {
-  "action": "req",
-  "code": 200,
-  "ch": "auth",
-  "data": {}
+	"action": "req",
+	"code": 200,
+	"ch": "auth",
+	"data": {}
 }
 ```
 
@@ -4221,7 +4216,7 @@ API Key 权限：读取
 | ---------------- | -------- | -------- | ------------------------------------------------------------ |
 | action           | true     | string   | Websocket数据操作类型，鉴权固定值为req                       |
 | ch               | true     | string   | 请求主题，鉴权固定值为auth                                   |
-| authType         | true     | string   | 鉴权类型，鉴权固定值为api                                    |
+| authType         | true     | string   | 鉴权类型，鉴权固定值为api。注意，该参数不在签名计算中。      |
 | accessKey        | true     | string   | 您申请的API Key中的AccessKey                                 |
 | signatureMethod  | true     | string   | 签名方法，用户计算签名寄语哈希的协议，固定值为HmacSHA256     |
 | signatureVersion | true     | string   | 签名协议版本，固定值为2.1                                    |
@@ -4233,21 +4228,21 @@ API Key 权限：读取
 v2.1版本签名与v2.0版本签名步骤相似，具体区别如下：
 
 1. 生成参与签名的字符串时，请求方法固定使用GET，请求地址固定为/ws/v2
-
 2. 生成参与签名的固定参数名替换为：accessKey，signatureMethod，signatureVersion，timestamp
-
 3. signatureVersion版本升级为2.1
 
-v2版本签名步骤,您可以点击 <a href='#c64cd15fdc'>这里 </a> 获取。
+v2版本签名步骤,您可以点击 <a href='https://alphaex-api.github.io/openapi/spot/v1/cn/#c64cd15fdc'>这里</a> 获取。
 
 签名前最后生成的字符串如下：
 
 ```
 GET\n
-api-cloud.huobi.co.kr\n
+api.huobi.co.kr\n
 /ws/v2\n
 accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&signatureMethod=HmacSHA256&signatureVersion=2.1&timestamp=2019-12-05T11%3A53%3A03
 ```
+
+注：JSON请求中的数据不需要URL编码。
 
 ### 订阅主题
 
@@ -4255,25 +4250,25 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&signatureMethod=HmacSHA256&signatur
 
 ```json
 {
-  "action": "sub",
-  "ch": "accounts.update"
+	"action": "sub",
+	"ch": "accounts.update"
 }
 ```
+
 订阅成功Websocket客户端会接收到如下消息：
 
 ```json
 {
-  "action": "sub",
-  "code": 200,
-  "ch": "accounts.update#0",
-  "data": {}
+	"action": "sub",
+	"code": 200,
+	"ch": "accounts.update#0",
+	"data": {}
 }
 ```
 
 ### 请求数据
 
 成功建立Websocket服务器的连接后，Websocket客户端发送如下请求用以获取一次性数据：
-
 
 ```json
 {
@@ -4293,28 +4288,61 @@ accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&signatureMethod=HmacSHA256&signatur
 }
 ```
 
-## 订阅清算后成交明细
+### 错误码
+
+以下是WebSocket资产和订单接口的错误码、错误消息和说明。
+
+| 错误码 | 错误消息                 | 说明                                         |
+| ------ | ------------------------ | -------------------------------------------- |
+| 200    | 正确                     | 正确返回                                     |
+| 100    | 超时关闭                 | 超时关闭                                     |
+| 400    | Bad Request              | 请求错误                                     |
+| 404    | Not Found                | 找不到服务                                   |
+| 429    | Too Many Requests        | 超过单机服务最大连接数或者超过单IP最大连接数 |
+| 500    | 系统异常                 | 系统错误                                     |
+| 2000   | invalid.ip               | 无效的ip                                     |
+| 2001   | nvalid.json              | 无效的请求json                               |
+| 2001   | invalid.authType         | 验签方式错误                                 |
+| 2001   | invalid.action           | 无效的订阅事件                               |
+| 2001   | invalid.symbol           | 无效的交易对                                 |
+| 2001   | invalid.ch               | 无效的订阅                                   |
+| 2001   | invalid.exchange         | 无效的交易所code                             |
+| 2001   | missing.param.auth       | 缺少验签参数                                 |
+| 2002   | invalid.auth.state       | 认证未通过                                   |
+| 2002   | auth.fail                | 验签失败                                     |
+| 2003   | query.account.list.error | 查询账户列表失败                             |
+| 4000   | too.many.request         | 客户端上行请求限频                           |
+| 4000   | too.many.connection      | 同一个key的建联数量                          |
+
+## 订阅订单更新
 
 API Key 权限：读取
 
-清算后成交明细包含了交易手续费以及交易手续费抵扣等信息，仅当用户订单成交时推送。
+订单的更新推送由任一以下事件触发：<br>
+
+- 计划委托或追踪委托触发失败事件（eventType=trigger）<br>
+- 计划委托或追踪委托触发前撤单事件（eventType=deletion）<br>
+- 订单创建（eventType=creation）<br>
+- 订单成交（eventType=trade）<br>
+- 订单撤销（eventType=cancellation）<br>
+
+不同事件类型所推送的消息中，字段列表略有不同。开发者可以采取以下两种方式设计返回的数据结构：<br>
+
+- 定义一个包含所有字段的数据结构，并允许某些字段为空<br>
+- 定义不同的数据结构，分别包含各自的字段，并继承自一个包含公共数据字段的数据结构
 
 ### 订阅主题
 
-`trade.clearing#${symbol}`
+` orders#${symbol}`
 
 ### 订阅参数
-
-| 参数   | 数据类型 | 描述                      |
-| ------ | -------- | ------------------------- |
-| symbol | string   | 交易代码（支持通配符 * ） |
 
 > Subscribe request
 
 ```json
 {
-  "action": "sub",
-  "ch": "trade.clearing#btcusdt"
+	"action": "sub",
+	"ch": "orders#btcusdt"
 }
 
 ```
@@ -4323,10 +4351,248 @@ API Key 权限：读取
 
 ```json
 {
-  "action": "sub",
-  "code": 200,
-  "ch": "trade.clearing#btcusdt",
-  "data": {}
+	"action": "sub",
+	"code": 200,
+	"ch": "orders#btcusdt",
+	"data": {}
+}
+```
+
+| 参数   | 数据类型 | 描述                      |
+| ------ | -------- | ------------------------- |
+| symbol | string   | 交易代码（支持通配符 * ） |
+
+### 数据更新字段列表
+
+> Update example
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"orderSide":"buy",
+		"lastActTime":1583853365586,
+		"clientOrderId":"abc123",
+		"orderStatus":"rejected",
+		"symbol":"btcusdt",
+		"eventType":"trigger",
+		"errCode": 2002,
+		"errMessage":"invalid.client.order.id (NT)"
+	}
+}
+```
+
+当计划委托/追踪委托触发失败后 –
+
+| 字段          | 数据类型 | 描述                                                         |
+| ------------- | -------- | ------------------------------------------------------------ |
+| eventType     | string   | 事件类型，有效值：trigger（本事件仅对计划委托/追踪委托有效） |
+| symbol        | string   | 交易代码                                                     |
+| clientOrderId | string   | 用户自编订单号                                               |
+| orderSide     | string   | 订单方向，有效值：buy,sell                                   |
+| orderStatus   | string   | 订单状态，有效值：rejected                                   |
+| errCode       | int      | 订单触发失败错误码                                           |
+| errMessage    | string   | 订单触发失败错误消息                                         |
+| lastActTime   | long     | 订单触发失败时间                                             |
+
+> Update example
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"orderSide":"buy",
+		"lastActTime":1583853365586,
+		"clientOrderId":"abc123",
+		"orderStatus":"canceled",
+		"symbol":"btcusdt",
+		"eventType":"deletion"
+	}
+}
+```
+
+当计划委托/追踪委托在触发前被撤销后 –
+
+| 字段          | 数据类型 | 描述                                                         |
+| ------------- | -------- | ------------------------------------------------------------ |
+| eventType     | string   | 事件类型，有效值：deletion（本事件仅对计划委托/追踪委托有效） |
+| symbol        | string   | 交易代码                                                     |
+| clientOrderId | string   | 用户自编订单号                                               |
+| orderSide     | string   | 订单方向，有效值：buy,sell                                   |
+| orderStatus   | string   | 订单状态，有效值：canceled                                   |
+| lastActTime   | long     | 订单撤销时间                                                 |
+
+> Update example
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"orderSize":"2.000000000000000000",
+		"orderCreateTime":1583853365586,
+		"accountId":992701,
+		"orderPrice":"77.000000000000000000",
+		"type":"sell-limit",
+		"orderId":27163533,
+		"clientOrderId":"abc123",
+		"orderStatus":"submitted",
+		"symbol":"btcusdt",
+		"eventType":"creation"
+	}
+}
+```
+
+当订单挂单后 –
+
+| 字段            | 数据类型 | 描述                                                         |
+| --------------- | -------- | ------------------------------------------------------------ |
+| eventType       | string   | 事件类型，有效值：creation                                   |
+| symbol          | string   | 交易代码                                                     |
+| accountId       | long     | 账户ID                                                       |
+| orderId         | long     | 订单ID                                                       |
+| clientOrderId   | string   | 用户自编订单号（如有）                                       |
+| orderPrice      | string   | 订单价格                                                     |
+| orderSize       | string   | 订单数量（对市价买单无效）                                   |
+| orderValue      | string   | 订单金额（仅对市价买单有效）                                 |
+| type            | string   | 订单类型，有效值：buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc |
+| orderStatus     | string   | 订单状态，有效值：submitted                                  |
+| orderCreateTime | long     | 订单创建时间                                                 |
+
+注：<BR>
+
+- 止盈止损订单在尚未被触发时，接口将不会推送此订单的创建；<br>
+- Taker订单在成交前，接口首先推送其创建事件。<br>
+- 止盈止损订单的订单类型不再是原始订单类型“buy-stop-limit”或“sell-stop-limit”，而是变为“buy-limit”或“sell-limit”。<BR>
+
+> Update example
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"tradePrice":"76.000000000000000000",
+		"tradeVolume":"1.013157894736842100",
+		"tradeId":301,
+		"tradeTime":1583854188883,
+		"aggressor":true,
+		"remainAmt":"0.000000000000000400000000000000000000",
+		"orderId":27163536,
+		"type":"sell-limit",
+		"clientOrderId":"abc123",
+		"orderStatus":"filled",
+		"symbol":"btcusdt",
+		"eventType":"trade"
+	}
+}
+```
+
+当订单成交后 –
+
+| 字段          | 数据类型 | 描述                                                         |
+| ------------- | -------- | ------------------------------------------------------------ |
+| eventType     | string   | 事件类型，有效值：trade                                      |
+| symbol        | string   | 交易代码                                                     |
+| tradePrice    | string   | 成交价                                                       |
+| tradeVolume   | string   | 成交量                                                       |
+| orderId       | long     | 订单ID                                                       |
+| type          | string   | 订单类型，有效值：buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc |
+| clientOrderId | string   | 用户自编订单号（如有）                                       |
+| tradeId       | long     | 成交ID                                                       |
+| tradeTime     | long     | 成交时间                                                     |
+| aggressor     | bool     | 是否交易主动方，有效值： true (taker), false (maker)         |
+| orderStatus   | string   | 订单状态，有效值：partial-filled, filled                     |
+| remainAmt     | string   | 未成交数量（市价买单为未成交金额）                           |
+
+注：<BR>
+
+- 止盈止损订单的订单类型不再是原始订单类型“buy-stop-limit”或“sell-stop-limit”，而是变为“buy-limit”或“sell-limit”。<BR>
+- 当一张taker订单同时与对手方多张订单成交后，所产生的每笔成交（tradePrice, tradeVolume, tradeTime, tradeId, aggressor）将被分别推送（而不是合并推送一笔）。<BR>
+
+> Update example
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"lastActTime":1583853475406,
+		"remainAmt":"2.000000000000000000",
+		"orderId":27163533,
+		"type":"sell-limit",
+		"clientOrderId":"abc123",
+		"orderStatus":"canceled",
+		"symbol":"btcusdt",
+		"eventType":"cancellation"
+	}
+}
+```
+
+当订单被撤销后 –
+
+| 字段          | 数据类型 | 描述                                                         |
+| ------------- | -------- | ------------------------------------------------------------ |
+| eventType     | string   | 事件类型，有效值：cancellation                               |
+| symbol        | string   | 交易代码                                                     |
+| orderId       | long     | 订单ID                                                       |
+| type          | string   | 订单类型，有效值：buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc |
+| clientOrderId | string   | 用户自编订单号（如有）                                       |
+| orderStatus   | string   | 订单状态，有效值：partial-canceled, canceled                 |
+| remainAmt     | string   | 未成交数量（市价买单为未成交金额）                           |
+| lastActTime   | long     | 订单最近更新时间                                             |
+
+注：<BR>
+
+- 止盈止损订单的订单类型不再是原始订单类型“buy-stop-limit”或“sell-stop-limit”，而是变为“buy-limit”或“sell-limit”。<BR>
+
+## 订阅清算后成交及撤单更新
+
+API Key 权限：读取
+
+仅当用户订单成交或撤销时推送。其中，订单成交为逐笔推送，如一张 taker 订单同时与多张 maker 订单成交，该接口将推送逐笔更新。但用户收到的这几笔成交消息的次序，有可能与实际的成交次序不完全一致。另外，如果一张订单的成交及撤销几乎同时发生，例如 IOC 订单成交后剩余部分被自动撤销，用户可能会先收到撤单推送，再收到成交推送。<br>
+
+如用户需要获取依次更新的订单推送，建议订阅另一频道 orders#${symbol}。<br>
+
+### 订阅主题
+
+`trade.clearing#${symbol}#${mode}`
+
+### 订阅参数
+
+| 参数   | 数据类型 | 是否必需 | 描述                                                         |
+| ------ | -------- | -------- | ------------------------------------------------------------ |
+| symbol | string   | TRUE     | 交易代码（支持通配符 * ）                                    |
+| mode   | int      | FALSE    | 推送模式（0 - 仅在订单成交时推送；1 - 在订单成交、撤销时均推送；缺省值：0） |
+
+注：<br>
+可选订阅参数 mode，如不填或填0，仅推送成交事件；如填1，推送成交及撤销事件。<br>
+
+> Subscribe request
+
+```json
+{
+	"action": "sub",
+	"ch": "trade.clearing#btcusdt#0"
+}
+
+```
+
+> Response
+
+```json
+{
+	"action": "sub",
+	"code": 200,
+	"ch": "trade.clearing#btcusdt#0",
+	"data": {}
 }
 ```
 
@@ -4334,8 +4600,9 @@ API Key 权限：读取
 
 ```json
 {
-    "ch": "trade.clearing#btcusdt",
+    "ch": "trade.clearing#btcusdt#0",
     "data": {
+         "eventType": "trade",
          "symbol": "btcusdt",
          "orderId": 99998888,
          "tradePrice": "9999.99",
@@ -4345,28 +4612,73 @@ API Key 权限：读取
          "tradeId": 919219323232,
          "tradeTime": 998787897878,
          "transactFee": "19.88",
-         " feeDeduct ": "0",
-         " feeDeductType": ""
+         "feeDeduct ": "0",
+         "feeDeductType": "",
+         "feeCurrency": "btc",
+         "accountId": 9912791,
+         "source": "spot-api",
+         "orderPrice": "10000",
+         "orderSize": "1",
+         "clientOrderId": "a001",
+         "orderCreateTime": 998787897878,
+         "orderStatus": "partial-filled"
     }
 }
 ```
 
-### 数据更新字段列表
+### 数据更新字段列表（当订单成交后）
 
-| 字段          | 数据类型 | 描述                                                         |
-| ------------- | -------- | ------------------------------------------------------------ |
-| symbol        | string   | 交易代码                                                     |
-| orderId       | long     | 订单ID                                                       |
-| tradePrice    | string   | 成交价                                                       |
-| tradeVolume   | string   | 成交量                                                       |
-| orderSide     | string   | 订单方向，有效值： buy, sell                                 |
-| orderType     | string   | 订单类型，有效值： buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit |
-| aggressor     | bool     | 是否交易主动方，有效值： true, false                         |
-| tradeId       | long     | 交易ID                                                       |
-| tradeTime     | long     | 成交时间，unix time in millisecond                           |
-| transactFee   | string   | 交易手续费                                                   |
-| feeDeduct     | string   | 交易手续费抵扣                                               |
-| feeDeductType | string   | 交易手续费抵扣类型，有效值： ht，point                       |
+| 字段            | 数据类型 | 描述                                                         |
+| --------------- | -------- | ------------------------------------------------------------ |
+| eventType       | string   | 事件类型（trade）                                            |
+| symbol          | string   | 交易代码                                                     |
+| orderId         | long     | 订单ID                                                       |
+| tradePrice      | string   | 成交价                                                       |
+| tradeVolume     | string   | 成交量                                                       |
+| orderSide       | string   | 订单方向，有效值： buy, sell                                 |
+| orderType       | string   | 订单类型，有效值： buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit |
+| aggressor       | bool     | 是否交易主动方，有效值： true, false                         |
+| tradeId         | long     | 交易ID                                                       |
+| tradeTime       | long     | 成交时间，unix time in millisecond                           |
+| transactFee     | string   | 交易手续费（正值）或交易手续费返佣（负值）                   |
+| feeCurrency     | string   | 交易手续费或交易手续费返佣币种（买单的交易手续费币种为基础币种，卖单的交易手续费币种为计价币种；买单的交易手续费返佣币种为计价币种，卖单的交易手续费返佣币种为基础币种） |
+| feeDeduct       | string   | 交易手续费抵扣                                               |
+| feeDeductType   | string   | 交易手续费抵扣类型，有效值： ht, point                       |
+| accountId       | long     | 账户编号                                                     |
+| source          | string   | 订单来源                                                     |
+| orderPrice      | string   | 订单价格 （市价单无此字段）                                  |
+| orderSize       | string   | 订单数量（市价买单无此字段）                                 |
+| orderValue      | string   | 订单金额（仅市价买单有此字段）                               |
+| clientOrderId   | string   | 用户自编订单号                                               |
+| stopPrice       | string   | 订单触发价（仅止盈止损订单有此字段）                         |
+| operator        | string   | 订单触发方向（仅止盈止损订单有此字段）                       |
+| orderCreateTime | long     | 订单创建时间                                                 |
+| orderStatus     | string   | 订单状态，有效值：filled, partial-filled                     |
+
+注：<br>
+
+- transactFee中的交易返佣金额可能不会实时到账；<br>
+
+### 数据更新字段列表（当订单撤销后）
+
+| 字段            | 数据类型 | 描述                                                         |
+| --------------- | -------- | ------------------------------------------------------------ |
+| eventType       | string   | 事件类型（cancellation）                                     |
+| symbol          | string   | 交易代码                                                     |
+| orderId         | long     | 订单ID                                                       |
+| orderSide       | string   | 订单方向，有效值： buy, sell                                 |
+| orderType       | string   | 订单类型，有效值： buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit |
+| accountId       | long     | 账户编号                                                     |
+| source          | string   | 订单来源                                                     |
+| orderPrice      | string   | 订单价格 （市价单无此字段）                                  |
+| orderSize       | string   | 订单数量（市价买单无此字段）                                 |
+| orderValue      | string   | 订单金额（仅市价买单有此字段）                               |
+| clientOrderId   | string   | 用户自编订单号                                               |
+| stopPrice       | string   | 订单触发价（仅止盈止损订单有此字段）                         |
+| operator        | string   | 订单触发方向（仅止盈止损订单有此字段）                       |
+| orderCreateTime | long     | 订单创建时间                                                 |
+| remainAmt       | string   | 未成交量（对于市价买单，该字段定义为未成交额）               |
+| orderStatus     | string   | 订单状态，有效值：canceled, partial-canceled                 |
 
 ## 订阅账户变更
 
@@ -4401,12 +4713,14 @@ accounts.update#0
 accounts.update#1  
 在账户余额发生变动或可用余额发生变动时均推送且分别推送。  
 
+注：无论用户采用哪种模式订阅，在订阅成功后，服务器将首先推送当前各账户的账户余额与可用余额，然后再推送后续的账户更新。在首推各账户初始值时，消息中的changeType和changeTime的值为null。
+
 > Subscribe request
 
 ```json
 {
-  "action": "sub",
-  "ch": "accounts.update"
+	"action": "sub",
+	"ch": "accounts.update"
 }
 ```
 
@@ -4414,10 +4728,10 @@ accounts.update#1
 
 ```json
 {
-  "action": "sub",
-  "code": 200,
-  "ch": "accounts.update#0",
-  "data": {}
+	"action": "sub",
+	"code": 200,
+	"ch": "accounts.update#0",
+	"data": {}
 }
 ```
 
@@ -4426,42 +4740,42 @@ accounts.update#1
 ```json
 accounts.update#0：
 {
-  "action": "push",
-  "ch": "accounts.update#0",
-  "data": {
-    "currency": "btc",
-    "accountId": 123456,
-    "balance": "23.111",
-    "changeType": "transfer",
-            "accountType":"trade",
-    "changeTime": 1568601800000
-  }
+	"action": "push",
+	"ch": "accounts.update#0",
+	"data": {
+		"currency": "btc",
+		"accountId": 123456,
+		"balance": "23.111",
+		"changeType": "transfer",
+           	"accountType":"trade",
+		"changeTime": 1568601800000
+	}
 }
 
 accounts.update#1：
 {
-  "action": "push",
-  "ch": "accounts.update#1",
-  "data": {
-    "currency": "btc",
-    "accountId": 33385,
-    "available": "2028.699426619837209087",
-    "changeType": "order.match",
-            "accountType":"trade",
-    "changeTime": 1574393385167
-  }
+	"action": "push",
+	"ch": "accounts.update#1",
+	"data": {
+		"currency": "btc",
+		"accountId": 33385,
+		"available": "2028.699426619837209087",
+		"changeType": "order.match",
+         		"accountType":"trade",
+		"changeTime": 1574393385167
+	}
 }
 {
-  "action": "push",
-  "ch": "accounts.update#1",
-  "data": {
-    "currency": "btc",
-    "accountId": 33385,
-    "balance": "2065.100267619837209301",
-    "changeType": "order.match",
-            "accountType":"trade",
-    "changeTime": 1574393385122
-  }
+	"action": "push",
+	"ch": "accounts.update#1",
+	"data": {
+		"currency": "btc",
+		"accountId": 33385,
+		"balance": "2065.100267619837209301",
+		"changeType": "order.match",
+           	"accountType":"trade",
+		"changeTime": 1574393385122
+	}
 }
 ```
 
@@ -4473,9 +4787,12 @@ accounts.update#1：
 | accountId   | long     | 账户ID                                                       |
 | balance     | string   | 账户余额（仅当账户余额发生变动时推送）                       |
 | available   | string   | 可用余额（仅当可用余额发生变动时推送）                       |
-| changeType  | string   | 余额变动类型，有效值：order-place(订单创建)，order-match(订单成交)，order-refund(订单成交退款)，order-cancel(订单撤销)，order-fee-refund(点卡抵扣交易手续费)，other(其他资产变化) |
+| changeType  | string   | 余额变动类型，有效值：order-place(订单创建)，order-match(订单成交)，order-refund(订单成交退款)，order-cancel(订单撤销)，order-fee-refund(点卡抵扣交易手续费) |
 | accountType | string   | 账户类型，有效值：trade, frozen, loan, interest              |
 | changeTime  | long     | 余额变动时间，unix time in millisecond                       |
+
+注：<br>
+账户更新推送的是到账金额，多笔成交产生的多笔交易返佣可能会合并到帐。
 
 <br>
 <br>
