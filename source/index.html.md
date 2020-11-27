@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - json
 
 toc_footers:
-  - <a href='https://www.huobi.pro/apikey/'>Sign Up for a Huobi Korea API key </a>
+  - <a href='https://www.huobi.kr/zh-cn/api/'>Sign Up for a Huobi Korea API key </a>
   - Login is required for creating an API key
 
 includes:
@@ -287,24 +287,18 @@ The sub user can access all public API (including basic information and market d
 
 API|Description
 ----------------------|---------------------
-[POST /v1/order/orders/place](#fd6ce2a756)	|Create and execute an order
-[POST /v1/order/orders/{order-id}/submitcancel](#4e53c0fccd)	|Cancel an order
-[POST /v1/order/orders/batchcancel](#ad00632ed5)	|Cancel multiple orders
-[POST /v1/order/orders/batchCancelOpenOrders](#open-orders)	|Cancel the open orders
-[GET /v1/order/orders/{order-id}](#92d59b6aad)	|Query a specific order
-[GET /v1/order/orders](#d72a5b49e7)	|Query orders with criteria
-[GET /v1/order/openOrders](#95f2078356)	|Query open orders
-[GET /v1/order/matchresults](#0fa6055598)	|Query the order matching result
-[GET /v1/order/orders/{order-id}/matchresults](#56c6c47284)	|Query a specific order matching result
-[GET /v1/account/accounts](#bd9157656f)	|Query all accounts in current user
-[GET /v1/account/accounts/{account-id}/balance](#870c0ab88b)	|Query the specific account balance
-[POST /v1/futures/transfer](#e227a2a3e8)	|Transfer with future account
-[POST /v1/dw/transfer-in/margin](#0d3c2e7382)|Transfer from spot to margin account
-[POST /v1/dw/transfer-out/margin](#0d3c2e7382)|Transfer from margin to spot account
-[POST /v1/margin/orders](#48cca1ce88)|Request margin loan
-[POST /v1/margin/orders/{order-id}/repay](#48aa7c8199)|Repay the debit for specific order
-[GET /v1/margin/loan-orders](#e52396720a)|Query history loan orders
-[GET /v1/margin/accounts/balance](#6e79ba8e80)|Query margin account balance
+[POST /v1/order/orders/place](#fd6ce2a756)  |Create and execute an order
+[POST /v1/order/orders/{order-id}/submitcancel](#4e53c0fccd)  |Cancel an order
+[POST /v1/order/orders/batchcancel](#ad00632ed5)  |Cancel multiple orders
+[POST /v1/order/orders/batchCancelOpenOrders](#open-orders) |Cancel the open orders
+[GET /v1/order/orders/{order-id}](#92d59b6aad)  |Query a specific order
+[GET /v1/order/orders](#d72a5b49e7) |Query orders with criteria
+[GET /v1/order/openOrders](#95f2078356) |Query open orders
+[GET /v1/order/matchresults](#0fa6055598) |Query the order matching result
+[GET /v1/order/orders/{order-id}/matchresults](#56c6c47284) |Query a specific order matching result
+[GET /v1/account/accounts](#bd9157656f) |Query all accounts in current user
+[GET /v1/account/accounts/{account-id}/balance](#870c0ab88b)  |Query the specific account balance
+[POST /v1/futures/transfer](#e227a2a3e8)  |Transfer with future account
 
 <aside class="notice">
 All other APIs couldn't be accessed by sub user, otherwise the API will return “error-code 403”。
@@ -326,7 +320,6 @@ The `account-id` defines the Identity for different business type, it can be ret
 The types include:
 
 * spot: Spot account
-* otc: OTC account
 * point: Point card account
 
 ### Identity
@@ -371,8 +364,6 @@ Common |/v1/common/* | Common interface, including currency, currency pair, time
 Market Data |/market/*| Market data interface, including trading, depth, quotation, etc 
 Account |/v1/account/*  /v1/subuser/* | Account interface, including account information, sub-account ,etc 
 Order |/v1/order/* | Order interface, including order creation, cancellation, query, etc 
-Margin|/v1/margin/* | Margin interface, including debit, payment, query, etc 
-Cross Margin| /v1/cross-margin/* | Cross margin interface, including debit, payment, query, etc 
 
 Above is a general category, it doesn't cover all API, you can refer to detailed API document according to your requirement.
 
@@ -600,7 +591,6 @@ A： The `account-id` defines the Identity for different business type, it can b
 The types include:
 
 - spot: Spot account
-- otc: OTC account
 - point: Point card account
 
 ### Q2：What is client-order-id?
@@ -674,7 +664,7 @@ The full chain name list for all currencies can be retrieved from endpoint `GET 
 
 A：Please refer to the response from endpoint `GET /v2/reference/currencies`, where the field `withdrawFeeType` defining different fee types below: 
 
-- transactFeeWithdraw : The withdraw fee per request (only applicable when withdrawFeeType=fixed).    	
+- transactFeeWithdraw : The withdraw fee per request (only applicable when withdrawFeeType=fixed).      
 - minTransactFeeWithdraw : The minimum withdraw fee per request (only applicable when withdrawFeeType=circulated).
 - maxTransactFeeWithdraw : The maximum withdraw fee per request (only applicable when withdrawFeeType=circulated or ratio).
 - transactFeeRateWithdraw : The withdraw fee rate per request (only applicable when withdrawFeeType=ratio).
@@ -1432,8 +1422,7 @@ Field               | Data Type | Description              | Value Range
 ---------           | --------- | -----------              | -----------
 id                  | integer   | Unique account id        | NA
 state               | string    | Account state            | working, lock
-type                | string    | The type of this account | spot, margin, otc, point, super-margin
-subtype                | string    | The type of sub account (applicable only for isolated margin accout)| The corresponding trading symbol (currency pair) the isolated margin is based on, e.g. btcusdt
+type                | string    | The type of this account | spot, point 
 
 ## Get Account Balance of a Specific Account
 
@@ -1488,8 +1477,8 @@ Field               | Data Type | Description              | Value Range
 ---------           | --------- | -----------              | -----------
 id                  | integer   | Unique account id        | NA
 state               | string    | Account state            | working, lock
-type                | string    | The type of this account | spot, margin, otc, point, super-margin
-list                | object    | The balance details of each currency
+type                | string    | The type of this account | spot,  point 
+list                | object    | The balance details of each currency|
 
 **Per list item content**
 
@@ -1653,7 +1642,7 @@ curl "https://api-cloud.huobi.co.kr/v1/subuser/aggregate-balance"
 Field               | Data Type | Description
 ---------           | --------- | -----------
 currency            | string    | The currency of this balance
-type|string|account type (spot, margin, point)
+type|string|account type (spot, point)
 balance             | string    | The total balance in the main currency unit including all balance and frozen banlance
 
 ## Get Account Balance of a Sub-Account
@@ -1707,7 +1696,7 @@ GET `/v1/account/accounts/{sub-uid}`
 Field               | Data Type | Description                           | Value Range
 ---------           | --------- | -----------                           | -----------
 id                  | integer   | Unique account id                     | NA
-type                | string    | The type of this account              | spot, margin, otc, point
+type                | string    | The type of this account              | spot, point 
 list                | object    | The balance details of each currency  | NA
 
 **Per list item content**
@@ -1958,21 +1947,21 @@ direct     | string    | false     | the order of response | 'prev' (ascending),
 
 ```json
 {
-	"status": "ok",
-	"data": [{
-		"id": 24383070,
-		"type": "deposit",
-		"currency": "usdt",
-		"chain": "usdterc20",
-		"tx-hash": "16382690",
-		"amount": 4.000000000000000000,
-		"address": "0x138d709030b4e096044d371a27efc5c562889b9b",
-		"address-tag": "",
-		"fee": 0,
-		"state": "safe",
-		"created-at": 1571303815800,
-		"updated-at": 1571303815826
-	}]
+  "status": "ok",
+  "data": [{
+    "id": 24383070,
+    "type": "deposit",
+    "currency": "usdt",
+    "chain": "usdterc20",
+    "tx-hash": "16382690",
+    "amount": 4.000000000000000000,
+    "address": "0x138d709030b4e096044d371a27efc5c562889b9b",
+    "address-tag": "",
+    "fee": 0,
+    "state": "safe",
+    "created-at": 1571303815800,
+    "updated-at": 1571303815826
+  }]
 }
 ```
 
@@ -2055,7 +2044,7 @@ symbol     | string    | true     | NA      | The trading symbol to trade       
 type       | string    | true     | NA      | The order type                            | buy-market, sell-market, buy-limit, sell-limit, buy-ioc, sell-ioc, buy-limit-maker, sell-limit-maker, buy-stop-limit, sell-stop-limit
 amount     | string    | true     | NA      | order size (for market buy order type, it's order value) | NA
 price      | string    | false    | NA      | The limit price of limit order, only needed for limit order   | NA
-source     | string    | false    | api     | When trade with margin use 'margin-api'; When trade with super-margin use 'super-margin-api';    | api, margin-api,super-margin-api
+source     | string    | false    | api     |     | api 
 client-order-id| string    | false    | NA     | Client order ID (maximum 64-character length, to be unique within 24 hours)  | 
 
 **buy-limit-maker ** 
@@ -2896,17 +2885,17 @@ err-msg     | string |N   | error message
 data|list|Y| Fee rate list
 
 ### List
-Field Name|	Datat Type|	Description
+Field Name| Datat Type| Description
 --------- | --------- | ------
-symbol|	string|	trading symbol
-maker-fee|	string|	maker fee rate
-taker-fee|	string|	taker fee rate
+symbol| string| trading symbol
+maker-fee|  string| maker fee rate
+taker-fee|  string| taker fee rate
 
 ### Error Code
-Error Code|	Description|	Data Type|	Remark
+Error Code| Description|  Data Type|  Remark
 --------- | --------- | ------ | ------
-base-symbol-error|	invalid symbol|	string|	-
-base-too-many-symbol|	exceeded maximum number of symbols|	string|	-
+base-symbol-error|  invalid symbol| string| -
+base-too-many-symbol| exceeded maximum number of symbols| string| -
 
 
 # Websocket Market Data
@@ -4136,14 +4125,12 @@ operator|string|opration character of stop price|
 
 **`wss://api-cloud.huobi.co.kr/ws/v2`**  
 
-**`wss://api-aws.huobi.pro/ws/v2`**   
-
 Note: 
 By comparing to api-cloud.huobi.co.kr, the network latency to api-aws.huobi.pro is lower, for those client's servers locating at AWS.
 
 ### Message Compression
 
-None.
+Different with v1, the return data of websocket v2 are not compressed.
 
 ### Heartbeat
 
@@ -4151,14 +4138,14 @@ Once the Websocket connection is established, Huobi server will periodically sen
 
 ```json
 {
-	"action": "ping",
-	"data": {
-		"ts": 1575537778295
-	}
+  "action": "ping",
+  "data": {
+    "ts": 1575537778295
+  }
 }
 ```
 
-Once client's server receives "ping", it should respond "pong" message back with the same integer.
+Once the Websocket connection is established, Huobi server will periodically send "ping" message at 20s interval, with an integer inside.
 
 ```json
 {
@@ -4169,14 +4156,24 @@ Once client's server receives "ping", it should respond "pong" message back with
 }
 ```
 
+Once client's server receives "ping", it should respond "pong" message back with the same integer.
+
 ### Valid Values of `action`
 
-| Valid Values| Description|
-| -----| -----|
-| sub | Subscribe|
-| req | Request|
-|ping,pong| Heartbeat|
-|push| Push (from Huobi server to client's server)|
+| Valid Values | Description                                 |
+| ------------ | ------------------------------------------- |
+| sub          | Subscribe                                   |
+| req          | Request                                     |
+| ping,pong    | Heartbeat                                   |
+| push         | Push (from Huobi server to client's server) |
+
+### Rate Limit
+
+There are multiple limitations for this version:
+
+- The limitation of single connection for **valid** request (including req, sub, unsub, not including ping/pong or other invalid request) is **50 per second**. It will return "too many request" when the limit is exceeded.
+- The limitation of single API Key is **10**. It will return "too many connection" when the limit is exceeded.
+- The limitation of single IP is **100 per second**. It will return "too many request" when the limitation is exceeded.
 
 ### Authentication
 
@@ -4202,10 +4199,10 @@ The response of success
 
 ```json
 {
-	"action": "req",
-	"code": 200,
-	"ch": "auth",
-	"data": {}
+  "action": "req",
+  "code": 200,
+  "ch": "auth",
+  "data": {}
 }
 ```
 
@@ -4230,7 +4227,7 @@ The signature generation method v2.1 is similar with v2.0, with only following d
 2. The involved field names in v2 signature generation are: accessKey，signatureMethod，signatureVersion，timestamp
 3. The valid value of signatureVersion is 2.1.
 
-Please refer to detailed signature generation steps from: [https://huobiapi.github.io/docs/spot/v1/cn/#c64cd15fdc]
+Please refer to detailed signature generation steps from: [https://alphaex-api.github.io/openapi/spot/v1/en/#authentication]
 
 The final string involved in signature generation should be like below:
 
@@ -4241,9 +4238,13 @@ api-cloud.huobi.co.kr\n
 accessKey=0664b695-rfhfg2mkl3-abbf6c5d-49810&signatureMethod=HmacSHA256&signatureVersion=2.1&timestamp=2019-12-05T11%3A53%3A03
 ```
 
+The final string involved in signature generation should be like below:
+
+Note: The data in JSON request doesn't require URL encode
+
 ### Subscribe a Topic to Continuously Receive Updates
 
-Once the Websocket connection is established, Websocket client could send following request to subscribe a topic:
+> Sub request:
 
 ```json
 {
@@ -4252,7 +4253,9 @@ Once the Websocket connection is established, Websocket client could send follow
 }
 ```
 
-Upon success, Websocket client should receive a response below:
+Once the Websocket connection is established, Websocket client could send following request to subscribe a topic:
+
+> Sub respose:
 
 ```json
 {
@@ -4263,50 +4266,57 @@ Upon success, Websocket client should receive a response below:
 }
 ```
 
-### Request an Update
-
-Once the Websocket connection is established, Websocket client could send following request to acquire an update:
-
-```json
-{
-    "action": "req", 
-    "ch": "topic",
-}
-```
-
 Upon success, Websocket client should receive a response below:
 
-```json
-{
-    "action": "req",
-    "ch": "topic",
-    "code": 200,
-    "data": {} // update contents
-}
-```
+Below is the return code, return message and the description returend from Asset and Order WebSocket
 
-## Subscribe Trade Details post Clearing
+| Return Code | Return Message           | Description                                       |
+| ----------- | ------------------------ | ------------------------------------------------- |
+| 200         | Success                  | Successful                                        |
+| 100         | time out close           | The connection is timeout and closed              |
+| 400         | Bad Request              | The request is invalid                            |
+| 404         | Not Found                | The service is not found                          |
+| 429         | Too Many Requests        | Connection number exceed limit                    |
+| 500         | system error             | System internal error                             |
+| 2000        | invalid.ip               | The IP is invalid                                 |
+| 2001        | nvalid.json              | The JSON request is invalid                       |
+| 2001        | invalid.action           | Parameter action is invalid                       |
+| 2001        | invalid.symbol           | Parameter symbol is invalid                       |
+| 2001        | invalid.ch               | Parameter channel is invalid                      |
+| 2001        | missing.param.auth       | Parameter auth is missing                         |
+| 2002        | invalid.auth.state       | Authentication state is invalid                   |
+| 2002        | auth.fail                | Authentication failed                             |
+| 2003        | query.account.list.error | Account query error                               |
+| 4000        | too.many.request         | Request exceed limit                              |
+| 4000        | too.many.connection      | Connection number exceed limit for single API Key |
+
+## Subscribe Order Updates
 
 API Key Permission: Read
 
-The topic updates trade details including transaction fee and transaction fee deduction etc. It only updates when transaction occurs.
+An order update can be triggered by any of following:<br>
+
+- Conditional order triggering failure (eventType=trigger)<br>
+- Conditional order cancellation before trigger (eventType=deletion)<br>
+- Order creation (eventType=creation)<br>
+- Order matching (eventType=trade)<br>
+- Order cancellation (eventType=cancellation)<br>
+
+The field list in order update message can be various per event type, developers can design the data structure in either of two ways:<br>
+
+- Define a data structure including fields for all event types, allowing a few of them null<br>
+- Define different data structure for each event type to include specific fields, inheriting from a common data structure which has common fields
 
 ### Topic
 
-`trade.clearing#${symbol}`
-
-### Subscription Field
-
-|Field | Data Type | Description |
-|--------- | --------- | -------- |
-|symbol     | string    | Trading symbol (wildcard * is allowed) |
+` orders#${symbol}`
 
 > Subscribe request
 
 ```json
 {
 	"action": "sub",
-	"ch": "trade.clearing#btcusdt"
+	"ch": "orders#btcusdt"
 }
 
 ```
@@ -4317,7 +4327,240 @@ The topic updates trade details including transaction fee and transaction fee de
 {
 	"action": "sub",
 	"code": 200,
-	"ch": "trade.clearing#btcusdt",
+	"ch": "orders#btcusdt",
+	"data": {}
+}
+```
+
+### Subscription Field
+
+| Field  | Data Type | Description                            |
+| ------ | --------- | -------------------------------------- |
+| symbol | string    | Trading symbol (wildcard * is allowed) |
+
+### Update Content
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"orderSide":"buy",
+		"lastActTime":1583853365586,
+		"clientOrderId":"abc123",
+		"orderStatus":"rejected",
+		"symbol":"btcusdt",
+		"eventType":"trigger",
+		"errCode": 2002,
+		"errMessage":"invalid.client.order.id (NT)"
+	}
+}
+```
+
+After conditional order triggering failure –
+
+| Field         | Data Type | Description                                                  |
+| ------------- | --------- | ------------------------------------------------------------ |
+| eventType     | string    | Event type, valid value: trigger (only applicable for conditional order) |
+| symbol        | string    | Trading symbol                                               |
+| clientOrderId | string    | Client order ID                                              |
+| orderSide     | string    | Order side, valid value: buy, sell                           |
+| orderStatus   | string    | Order status, valid value: rejected                          |
+| errCode       | int       | Error code for triggering failure                            |
+| errMessage    | string    | Error message for triggering failure                         |
+| lastActTime   | long      | Order trigger time                                           |
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"orderSide":"buy",
+		"lastActTime":1583853365586,
+		"clientOrderId":"abc123",
+		"orderStatus":"canceled",
+		"symbol":"btcusdt",
+		"eventType":"deletion"
+	}
+}
+```
+
+After conditional order being cancelled before triggering –
+
+| Field         | Data Type | Description                                                  |
+| ------------- | --------- | ------------------------------------------------------------ |
+| eventType     | string    | Event type, valid value: deletion (only applicable for conditional order) |
+| symbol        | string    | Trading symbol                                               |
+| clientOrderId | string    | Client order ID                                              |
+| orderSide     | string    | Order side, valid value: buy, sell                           |
+| orderStatus   | string    | Order status, valid value: canceled                          |
+| lastActTime   | long      | Order trigger time                                           |
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"orderSize":"2.000000000000000000",
+		"orderCreateTime":1583853365586,
+		"accountld":992701,
+		"orderPrice":"77.000000000000000000",
+		"type":"sell-limit",
+		"orderId":27163533,
+		"clientOrderId":"abc123",
+		"orderStatus":"submitted",
+		"symbol":"btcusdt",
+		"eventType":"creation"
+    
+	}
+}
+```
+
+After order is submitted –
+
+| Field           | Data Type | Description                                                  |
+| --------------- | --------- | ------------------------------------------------------------ |
+| eventType       | string    | Event type, valid value: creation                            |
+| symbol          | string    | Trading symbol                                               |
+| accountId       | long      | account ID                                                   |
+| orderId         | long      | Order ID                                                     |
+| clientOrderId   | string    | Client order ID (if any)                                     |
+| orderPrice      | string    | Order price                                                  |
+| orderSize       | string    | Order size (inapplicable for market buy order)               |
+| orderValue      | string    | Order value (only applicable for market buy order)           |
+| type            | string    | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc |
+| orderStatus     | string    | Order status, valid value: submitted                         |
+| orderCreateTime | long      | Order creation time                                          |
+
+Note:<br>
+
+- If a stop limit order is created but not yet triggered, the topic won’t send an update.<br>
+- The topic will send creation update for taker's order before it being filled.<br>
+- Stop limit order's type is no longer as “buy-stop-limit” or “sell-stop-limit”, but changing to “buy-limit” or “sell-limit”.<br>
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"tradePrice":"76.000000000000000000",
+		"tradeVolume":"1.013157894736842100",
+		"tradeId":301,
+		"tradeTime":1583854188883,
+		"aggressor":true,
+		"remainAmt":"0.000000000000000400000000000000000000",
+		"orderId":27163536,
+		"type":"sell-limit",
+		"clientOrderId":"abc123",
+		"orderStatus":"filled",
+		"symbol":"btcusdt",
+		"eventType":"trade"
+	}
+}
+```
+
+After order matching –
+
+| Field         | Data Type | Description                                                  |
+| ------------- | --------- | ------------------------------------------------------------ |
+| eventType     | string    | Event type, valid value: trade                               |
+| symbol        | string    | Trading symbol                                               |
+| tradePrice    | string    | Trade price                                                  |
+| tradeVolume   | string    | Trade volume                                                 |
+| orderId       | long      | Order ID                                                     |
+| type          | string    | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc |
+| clientOrderId | string    | Client order ID (if any)                                     |
+| tradeId       | long      | Trade ID                                                     |
+| tradeTime     | long      | Trade time                                                   |
+| aggressor     | bool      | Aggressor or not, valid value: true (taker), false (maker)   |
+| orderStatus   | string    | Order status, valid value: partial-filled, filled            |
+| remainAmt     | string    | Remaining amount (for buy-market order it's remaining value) |
+
+Note:<br>
+
+- Stop limit order's type is no longer as “buy-stop-limit” or “sell-stop-limit”, but changing to “buy-limit” or “sell-limit”.<br>
+- If a taker’s order matching with multiple orders at opposite side simultaneously, the multiple trades will be disseminated over separately instead of merging into one trade.<br>
+
+> Update example
+
+```json
+{
+	"action":"push",
+	"ch":"orders#btcusdt",
+	"data":
+	{
+		"lastActTime":1583853475406,
+		"remainAmt":"2.000000000000000000",
+		"orderId":27163533,
+		"type":"sell-limit",
+		"clientOrderId":"abc123",
+		"orderStatus":"canceled",
+		"symbol":"btcusdt",
+		"eventType":"cancellation"
+	}
+}
+```
+
+After order cancellation –
+
+| Field         | Data Type | Description                                                  |
+| ------------- | --------- | ------------------------------------------------------------ |
+| eventType     | string    | Event type, valid value: cancellation                        |
+| symbol        | string    | Trading symbol                                               |
+| orderId       | long      | Order ID                                                     |
+| type          | string    | Order type, valid value: buy-market, sell-market, buy-limit, sell-limit, buy-limit-maker, sell-limit-maker, buy-ioc, sell-ioc |
+| clientOrderId | string    | Client order ID (if any)                                     |
+| orderStatus   | string    | Order status, valid value: partial-canceled, canceled        |
+| remainAmt     | string    | Remaining amount	(for buy-market order it's remaining value) |
+| lastActTime   | long      | Last activity time                                           |
+
+Note:<br>
+
+- Stop limit order's type is no longer as “buy-stop-limit” or “sell-stop-limit”, but changing to “buy-limit” or “sell-limit”.<br>
+
+## Subscribe Trade Details & Order Cancellation post Clearing
+
+API Key Permission: Read
+
+Only update when order transaction or cancellation. Order transaction update is in tick by tick mode, which means, if a taker’s order matches with multiple maker’s orders, the simultaneous multiple trades will be disseminated one by one. But, the update sequence of the multiple trades, may not be exactly same with the sequence of the transactions made. Also, if an order is auto cancelled immediately just after its partial fills, for example a typical IOC order, this channel would be possibly disseminate the cancellation update first prior to the trade. <br>
+
+If user willing to receive order updates in exact same sequence with the original happening, it is recommended to subscribe order update channel orders#${symbol}.<br>
+
+### Topic
+
+`trade.clearing#${symbol}#${mode}`
+
+### Subscription Field
+
+| Field  | Data Type | Description                                                  |
+| ------ | --------- | ------------------------------------------------------------ |
+| symbol | string    | Trading symbol (wildcard * is allowed)                       |
+| mode   | int       | Subscription mode (0 – subscribe only trade event; 1 – subscribe both trade and cancellation events; default value: 0) |
+
+Note:<br>
+About optional field ‘mode’: If not filled, or filled with 0, it implicates to subscribe trade event only. If filled with 1, it implicates to subscribe both trade and cancellation events.<br>
+
+> Subscribe request
+
+```json
+{
+	"action": "sub",
+	"ch": "trade.clearing#btcusdt#0"
+}
+
+```
+
+> Response
+
+```json
+{
+	"action": "sub",
+	"code": 200,
+	"ch": "trade.clearing#btcusdt#0",
 	"data": {}
 }
 ```
@@ -4326,8 +4569,9 @@ The topic updates trade details including transaction fee and transaction fee de
 
 ```json
 {
-    "ch": "trade.clearing#btcusdt",
+    "ch": "trade.clearing#btcusdt#0",
     "data": {
+         "eventType": "trade",
          "symbol": "btcusdt",
          "orderId": 99998888,
          "tradePrice": "9999.99",
@@ -4337,28 +4581,73 @@ The topic updates trade details including transaction fee and transaction fee de
          "tradeId": 919219323232,
          "tradeTime": 998787897878,
          "transactFee": "19.88",
-         " feeDeduct ": "0",
-         " feeDeductType": ""
+         "feeDeduct ": "0",
+         "feeDeductType": "",
+         "feeCurrency": "btc",
+         "accountId": 9912791,
+         "source": "spot-api",
+         "orderPrice": "10000",
+         "orderSize": "1",
+         "clientOrderId": "a001",
+         "orderCreateTime": 998787897878,
+         "orderStatus": "partial-filled"
     }
 }
 ```
 
-### Update Contents
+### Update Contents (after order matching)
 
-|Field     | Data Type | Description|
-|--------- | --------- | -----------|
-|	symbol	|	string	|	Trading symbol|
-|	orderId	|	long	|	 Order ID|
-| tradePrice	|	string	|	Trade price|
-|	tradeVolume	|	string	|	Trade volume|
-|	orderSide	|	string	|	Order side, valid value: buy,sell|
-|	orderType	|	string	|	Order type, valid value: buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit|
-|	aggressor	|	bool	|	Aggressor or not, valid value: true, false|
-| tradeId	|	long	|	Trade ID|
-| tradeTime	|	long	|	Trade time, unix time in millisecond|
-|	transactFee	|	string	|	Transaction fee|
-|	feeDeduct	|	string	|	Transaction fee deduction|
-|	feeDeductType	|	string	|		Transaction fee deduction type, valid value: ht,point|
+| Field           | Data Type | Description                                                  |
+| --------------- | --------- | ------------------------------------------------------------ |
+| eventType       | string    | Event type (trade)                                           |
+| symbol          | string    | Trading symbol                                               |
+| orderId         | long      | Order ID                                                     |
+| tradePrice      | string    | Trade price                                                  |
+| tradeVolume     | string    | Trade volume                                                 |
+| orderSide       | string    | Order side, valid value: buy, sell                           |
+| orderType       | string    | Order type, valid value: buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit |
+| aggressor       | bool      | Aggressor or not, valid value: true, false                   |
+| tradeId         | long      | Trade ID                                                     |
+| tradeTime       | long      | Trade time, unix time in millisecond                         |
+| transactFee     | string    | Transaction fee (positive value) or Transaction rebate (negative value) |
+| feeCurrency     | string    | Currency of transaction fee or transaction fee rebate (transaction fee of buy order is based on base currency, transaction fee of sell order is based on quote currency; transaction fee rebate of buy order is based on quote currency, transaction fee rebate of sell order is based on base currency) |
+| feeDeduct       | string    | Transaction fee deduction                                    |
+| feeDeductType   | string    | Transaction fee deduction type, valid value: ht, point       |
+| accountId       | long      | Account ID                                                   |
+| source          | string    | Order source                                                 |
+| orderPrice      | string    | Order price (invalid for market order)                       |
+| orderSize       | string    | Order size (invalid for market buy order)                    |
+| orderValue      | string    | Order value (only valid for market buy order)                |
+| clientOrderId   | string    | Client order ID                                              |
+| stopPrice       | string    | Stop price (only valid for stop limit order)                 |
+| operator        | string    | Operation character (only valid for stop limit order)        |
+| orderCreateTime | long      | Order creation time                                          |
+| orderStatus     | string    | Order status, valid value: filled, partial-filled            |
+
+Notes:<br>
+
+- The calculated maker rebate value inside ‘transactFee’ would not be paid immediately.<br>
+
+### Update Contents (after order cancellation)
+
+| Field           | Data Type | Description                                                  |
+| --------------- | --------- | ------------------------------------------------------------ |
+| eventType       | string    | Event type (cancellation)                                    |
+| symbol          | string    | Trading symbol                                               |
+| orderId         | long      | Order ID                                                     |
+| orderSide       | string    | Order side, valid value: buy, sell                           |
+| orderType       | string    | Order type, valid value: buy-market, sell-market,buy-limit,sell-limit,buy-ioc,sell-ioc,buy-limit-maker,sell-limit-maker,buy-stop-limit,sell-stop-limit |
+| accountId       | long      | Account ID                                                   |
+| source          | string    | Order source                                                 |
+| orderPrice      | string    | Order price (invalid for market order)                       |
+| orderSize       | string    | Order size (invalid for market buy order)                    |
+| orderValue      | string    | Order value (only valid for market buy order)                |
+| clientOrderId   | string    | Client order ID                                              |
+| stopPrice       | string    | Stop price (only valid for stop limit order)                 |
+| operator        | string    | Operation character (only valid for stop limit order)        |
+| orderCreateTime | long      | Order creation time                                          |
+| remainAmt       | string    | Remaining order amount (if market buy order, it implicates remaining order value) |
+| orderStatus     | string    | Order status, valid value: canceled, partial-canceled        |
 
 ## Subscribe Account Change
 
@@ -4378,9 +4667,9 @@ Upon subscription field value specified, the update can be triggered by either o
 
 ### Subscription Field
 
-| Field | Data Type |  Description |
-| --------- | --------- | --------- |
-| mode    | integer   | Trigger mode, valid value: 0, 1, default value: 0|
+| Field | Data Type | Description                                       |
+| ----- | --------- | ------------------------------------------------- |
+| mode  | integer   | Trigger mode, valid value: 0, 1, default value: 0 |
 
 Samples  
 1、Not specifying "mode":  
@@ -4392,6 +4681,9 @@ Only update when account balance changed;
 3、Specify "mode" as 1:  
 accounts.update#1  
 Update when either account balance changed or available balance changed.  
+
+Note:
+The topic disseminates the current static value of individual accounts first, at the beginning of subscription, followed by account change updates. While disseminating the current static value of individual accounts, inside the message, field value of "changeType" and "changeTime" is null.
 
 > Subscribe request
 
@@ -4459,14 +4751,16 @@ accounts.update#1：
 
 ### Update Contents
 
-|Field               | Data Type | Description|
-|---------           | --------- | -----------|
-|	currency	|	string	|	Currency|
-|	accountId	|	long	|	Account ID|
-|	balance	|	string	|	Account balance (only exists when account balance changed)|
-|	available	|	string	|	Available balance (only exists when available balance changed)|
-|	changeType	|	string	| Change type, valid value: order-place,order-match,order-refund,order-cancel,order-fee-refund,margin-transfer,margin-loan,margin-interest,margin-repay,other, |
-|	accountType	|	string	|	account type, valid value: trade, frozen, loan, interest|
-|	changeTime	|	long	|	Change time, unix time in millisecond|
+| Field       | Data Type | Description                                                  |
+| ----------- | --------- | ------------------------------------------------------------ |
+| currency    | string    | Currency                                                     |
+| accountId   | long      | Account ID                                                   |
+| balance     | string    | Account balance (only exists when account balance changed)   |
+| available   | string    | Available balance (only exists when available balance changed) |
+| changeType  | string    | Change type, valid value: order-place,order-match,order-refund,order-cancel,order-fee-refund,other,deposit,withdraw |
+| accountType | string    | account type, valid value: trade, frozen, loan, interest     |
+| changeTime  | long      | Change time, unix time in millisecond                        |
 
+Note:<br>
 
+- A maker rebate would be paid in batch mode for multiple trades.<br>
