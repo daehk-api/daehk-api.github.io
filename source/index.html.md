@@ -4164,6 +4164,7 @@ API Key 权限：读取<br>
 | role      | true | string   | 成交角色    |maker,taker      |
 | filled-points      | true | string   | 抵扣数量（可为ht或hbpoint）    |     |
 | fee-deduct-currency      | true | string   | 抵扣类型    |如果为空，代表扣除的手续费是原币；如果为"ht"，代表抵扣手续费的是HT；如果为"hbpoint"，代表抵扣手续费的是点卡     |
+| fee-deduct-state | true | string | 抵扣状态 |抵扣中：ongoing，抵扣完成：done |
 
 注：<br>
 - filled-fees中的交易返佣金额可能不会实时到账。<br>
@@ -4430,6 +4431,7 @@ API Key 权限：读取<br>
 | role      | true | string   | 成交角色    |maker,taker      |
 | filled-points      | true | string   | 抵扣数量（可为ht或hbpoint）    |     |
 | fee-deduct-currency      | true | string   | 抵扣类型    |ht,hbpoint     |
+| fee-deduct-state | true | string | 抵扣状态 |抵扣中：ongoing，抵扣完成：done |
 
 注：<br>
 - filled-fees中的交易返佣金额可能不会实时到账；<br>
