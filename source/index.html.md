@@ -4376,6 +4376,7 @@ API Key 권한: 읽기
 | role      | true | string   | 체결 역할 |maker,taker      |
 | filled-points      | true | string   | 차감 수량(ht 혹은hbpoint) |     |
 | fee-deduct-currency      | true | string   | 차감 유형 |NULL이면 차감 수수료는 거래 코인; "ht"이면 차감 수수료는 HT; "hbpoint"이면 차감 수수료는 수수료 쿠폰     |
+| fee-deduct-state | true | string | 차감 상태 |차감중：ongoing，차감 완료：done |
 
 설명： 
 
@@ -4642,6 +4643,7 @@ API Key 권한：읽기
 | role      | true | string   | 체결 역할 |maker,taker      |
 | filled-points      | true | string   | 차감 수량(hbpoint) |     |
 | fee-deduct-currency      | true | string   | 차감 유형 |hbpoint     |
+| fee-deduct-state | true | string | 차감 상태 |차감중：ongoing，차감 완료：done |
 
 ### start-date, end-date관련 오류 코드 
 
