@@ -2237,7 +2237,6 @@ Note:<br>
 Wallet APIs provide query functionality for deposit address, withdraw address, withdraw quota, deposit and withdraw history, and also provide withdraw and cancel-withdraw functionality.
 
 <aside class="notice">All endpoints in this section require authentication</aside>
-
 Below is the response code, message and description returned by Wallet APIs.
 
 | Response Code | Message                              | Description            |
@@ -2255,7 +2254,6 @@ API Key Permission：Read<br>
 Rate Limit (NEW): 20times/2s
 
 <aside class="notice"> The endpoint does not support deposit address querying for currency "IOTA" at this moment </aside>
-
 ### HTTP Request
 
 `GET https://api.huobi.co.kr/v2/account/deposit/address`
@@ -2448,7 +2446,6 @@ Parent user creates a withdraw request from spot account to an external address 
 
 <aside class="notice">If user has chosen fast withdraw preferred in  <a href='https://www.hbg.com/en-us/user_center/uc_setting/'>settings </a>, the withdraw requests submitted via this endpoint would choose 'fast withdraw' as preferred channel. </aside>
 <aside class="notice">Only support the existed addresses in your  <a href='https://www.hbg.com/en-us/withdraw_address/'>withdraw address list</a>. The once-off withdraw address of IOTA couldn't be set in the list, thus IOTA withdrawal is not supported through API. </aside>
-
 ### HTTP Request
 
 `POST https://api.huobi.co.kr/v1/dw/withdraw/api/create`
@@ -2485,13 +2482,11 @@ curl -X POST -H "Content-Type: application/json" "https://api.huobi.co.kr/v1/dw/
 ### Response Content
 
 <aside class="notice">The return data contains a single value instead of an object</aside>
-
 | Field | Data Type | Description |
 | ----- | --------- | ----------- |
 | data  | integer   | Transfer id |
 
 <aside class="notice">All new transfer id will be incremental to the previous ids. This allows search by transfer id sequences</aside>
-
 ## Cancel a Withdraw Request
 
 API Key Permission：Withdraw<br>
@@ -2512,7 +2507,6 @@ curl -X POST "https://api.huobi.co.kr/v1/dw/withdraw-virtual/1000/cancel"
 ### Request Parameters
 
 <aside class="notice">No parameter is needed for this endpoint</aside>
-
 > The above command returns JSON structured like this:
 
 ```json
@@ -2522,7 +2516,6 @@ curl -X POST "https://api.huobi.co.kr/v1/dw/withdraw-virtual/1000/cancel"
 ### Response Content
 
 <aside class="notice">The return data contains a single value instead of an object</aside>
-
 | Parameter | Data Type | Description        |
 | --------- | --------- | ------------------ |
 | data      | integer   | Withdraw cancel id |
@@ -4194,6 +4187,7 @@ source              | string    | The source where the order was triggered, poss
 role                  | string   | the role in the transaction: taker or maker
 filled-points      | string   | deduction amount (unit: in ht or hbpoint) 
 fee-deduct-currency      | string   | deduction type. if blank, the transaction fee is based on original currency; if showing value as "ht", the transaction fee is deducted by HT; if showing value as "hbpoint", the transaction fee is deducted by HB point.    
+fee-deduct-state | string | Fee deduction status，In deduction：ongoing，Deduction completed：done 
 
 Notes:<br>
 
@@ -4450,6 +4444,7 @@ size       | int       | false    | 100     | The number of orders to return    
 | role                | string    | The role in the transaction: taker or maker.                 |
 | filled-points       | string    | deduction amount (unit: in ht or hbpoint)                    |
 | fee-deduct-currency | string    | deduction type: ht or hbpoint.                               |
+| fee-deduct-state    | string    | Fee deduction status，In deduction：ongoing，Deduction completed：done |
 
 Notes:<br>
 
@@ -4558,7 +4553,6 @@ After connected to Huobi's Websocket server, the server will send heartbeat peri
 When client receives this heartbeat message, it should response with a matching "pong" message which has the same integer in it, e.g.
 
 <aside class="warning">After the server sent two consecutive heartbeat messages without receiving at least one matching "pong" response from a client, then right before server sends the next "ping" heartbeat, the server will disconnect this client</aside>
-
 ### Subscribe to Topic
 
 To receive data you have to send a "sub" message first.
