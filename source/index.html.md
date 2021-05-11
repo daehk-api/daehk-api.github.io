@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - json
 
 toc_footers:
-  - <a href='https://www.huobi.kr/zh-cn/api/'>创建 API Key </a>
+  - <a href='https://www. huobi.co.kr/zh-cn/api/'>创建 API Key </a>
 includes:
 
 search: false
@@ -54,7 +54,7 @@ API 使用中如有疑问或咨询事项，请参考`咨询事项 Q&A`或者通�
 
 如需使用API ，请先登录网页端，完成API key的申请和权限配置，再据此文档详情进行开发和交易。  
 
-您可以点击 <a href='https://www.huobi.kr/zh-cn/api/'>这里 </a> 创建 API Key。
+您可以点击 <a href='https://www. huobi.co.kr/zh-cn/api/'>这里 </a> 创建 API Key。
 
 每个母用户可创建20组Api Key，每个Api Key可对应设置读取、交易、提币三种权限。  
 
