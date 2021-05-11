@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - json
 
 toc_footers:
-  - <a href='https://www.huobi.co.kr/apikey/'>Sign Up for a Huobi Korea API key </a>
+  - <a href='https://www.huobi.co.kr/en-us/api/'>Sign Up for a Huobi Korea API key </a>
   - Login is required for creating an API key
 
 includes:
