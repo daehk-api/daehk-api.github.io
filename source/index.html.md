@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='https://www.huobi.kr/ko-kr/api/'>API Key 생성</a>
+  - <a href='https://www.huobi.co.kr/ko-kr/api/'>API Key 생성</a>
 includes:
 
 search: false
@@ -59,7 +59,7 @@ API 관련하여 궁금증 또는 문의사항이 있을 경우 `자주 묻는 �
 
 API를 이용하기 위해서는 먼저 API key를 발급받아야 합니다. API Key를 발급받은 후 권한을 설정하고 본 문서를 참조하여 시스템 개발 후 거래하시기 바랍니다.
 
-본 <a href='https://www.huobi.kr/ko-kr/api/'>링크</a> 에서 API Key를 생성합니다.
+본 <a href='https://www.huobi.co.kr/ko-kr/api/'>링크</a> 에서 API Key를 생성합니다.
 
 매개 마스터 계정은 API Key 20개 그룹을 생성하고 매개 Api Key는 읽기, 거래, 출금 등 3가지 권한을 설정할 수 있습니다.  
 
@@ -1013,16 +1013,16 @@ curl "https://api.huobi.co.kr/v2/market-status"
 
 ### 응답 데이터
 
-|	매개 변수	|	유형	|	필수 여부	|	설명	|
-|	-----	|	---------	|	--------	|	-----------	|
-|	code	|	integer	|	TRUE	|	상태 코드	|
-|	message	|	string	|	FALSE	|	오류 설명	|
-|	data	|	object	|	TRUE	|		|
-|	{ marketStatus	|	integer	|	TRUE	|	시장 상태（1=normal, 2=halted, 3=cancel-only）	|
-|	haltStartTime	|	long	|	FALSE	|	시장 중지 시작시간（unix time in millisecond）, marketStatus=halted 혹은 cancel-only에만 유효	|
-|	haltEndTime	|	long	|	FALSE	|	시장 중지 예정 마감 시간（unix time in millisecond）, marketStatus=halted 혹은 cancel-only에만 유효; marketStatus=halted 혹은 cancel-only시 반환 값이 없으면 시장 중지 예정 마감 시간이 없거나 예측 할 수 없는 경우 입니다.	|
-|	haltReason	|	integer	|	FALSE	|	시장 중지 원인（2=emergency-maintenance, 3=scheduled-maintenance）, marketStatus=halted 혹은 cancel-only에만 유효	|
-|	affectedSymbols }	|	string	|	FALSE	|	시장 중지한 거래페어 리스트, 쉼표로 거래페어를 나뉘고 "all"을 반환 하면 모든 거래페어를 중지 합니다. marketStatus=halted 혹은 cancel-only에만 유효	|
+| 매개 변수 | 유형  | 필수 여부 | 설명  |
+| ----- | --------- | --------  | ----------- |
+| code  | integer | TRUE  | 상태 코드 |
+| message | string  | FALSE | 오류 설명 |
+| data  | object  | TRUE  |   |
+| { marketStatus  | integer | TRUE  | 시장 상태（1=normal, 2=halted, 3=cancel-only）  |
+| haltStartTime | long  | FALSE | 시장 중지 시작시간（unix time in millisecond）, marketStatus=halted 혹은 cancel-only에만 유효 |
+| haltEndTime | long  | FALSE | 시장 중지 예정 마감 시간（unix time in millisecond）, marketStatus=halted 혹은 cancel-only에만 유효; marketStatus=halted 혹은 cancel-only시 반환 값이 없으면 시장 중지 예정 마감 시간이 없거나 예측 할 수 없는 경우 입니다.  |
+| haltReason  | integer | FALSE | 시장 중지 원인（2=emergency-maintenance, 3=scheduled-maintenance）, marketStatus=halted 혹은 cancel-only에만 유효 |
+| affectedSymbols } | string  | FALSE | 시장 중지한 거래페어 리스트, 쉼표로 거래페어를 나뉘고 "all"을 반환 하면 모든 거래페어를 중지 합니다. marketStatus=halted 혹은 cancel-only에만 유효  |
 
 ## 모든 거래페어 정보 수집
 
@@ -2104,9 +2104,9 @@ endTime기본값: 현재 시간
 설명3:
 
 유저가 요청한 시간 범위 내의 건수가 한 개 페이지 제한("limit"필드로 설정)을 초과하는 경우 "nextId"를 반환합니다.
-1）	일부 데이터가 본 페이지에서 전부 반환되지 않은 경우;
-2）	다음 페이지를 조회하려면 서버에 다시 요청하고 "nextId"를 "fromId"로 하여 요청하고 기타 요청하는 파라미터는 변하지 않습니다.
-3）	데이터베이스 기록 ID로서 "nextId"와 "fromId"가 사용되고 페이징 외 기타 업무에는 의미가 없습니다.
+1）  일부 데이터가 본 페이지에서 전부 반환되지 않은 경우;
+2）  다음 페이지를 조회하려면 서버에 다시 요청하고 "nextId"를 "fromId"로 하여 요청하고 기타 요청하는 파라미터는 변하지 않습니다.
+3）  데이터베이스 기록 ID로서 "nextId"와 "fromId"가 사용되고 페이징 외 기타 업무에는 의미가 없습니다.
 
 ## 수수료 쿠폰 잔액 조회
 
@@ -2130,9 +2130,9 @@ API Key 권한：읽기
 
 ### 요청 매개 변수
 
-|	매개 변수	|	유형	|	필수 여부 |	설명	|
-|	-----	|	-----	|	---------	|	-----	|
-|	subUid |	string	|	FALSE	|서브 계정UID（마스터 계정이 서브 계정 쿠폰 잔액을 조회할 때에만 유효합니다）	|
+| 매개 변수 | 유형  | 필수 여부 | 설명  |
+| ----- | ----- | --------- | ----- |
+| subUid |  string  | FALSE |서브 계정UID（마스터 계정이 서브 계정 쿠폰 잔액을 조회할 때에만 유효합니다） |
 
 > Response:
 
@@ -2157,18 +2157,18 @@ API Key 권한：읽기
 
 ### 응답 데이터
 
-|	매개 변수	|	유형	|	필수 여부	|	설명	|
-|	-----	|	-----	|	---------	|	-----	|
-|	code	|	integer	|	TRUE	|상태 코드	|
-|	message	|	string	|	FALSE	|오류 설명(오류가 있는 경우)	|
-|	data	|	object	|	TRUE	|	|
-|	{ accountId	|	string	|	TRUE	|계정ID	|
-|	accountStatus	|	string	|	TRUE	| 계정 상태（working 은 정상, lock 잠금）	|
-|	acctBalance	|	string	|	TRUE	|계정 잔액	|
-|	groupIds	|	object	|	TRUE	| 쿠폰 그룹ID 리스트	|
-|	{ groupId	|	long	|	TRUE	| 쿠폰 그룹ID	|
-|	expiryDate	|	long	|	TRUE	| 쿠폰 만료 일자（unix time in millisecond）	|
-|	remainAmt  }}	|	string	|	TRUE	|잔액 수량	|
+| 매개 변수 | 유형  | 필수 여부 | 설명  |
+| ----- | ----- | --------- | ----- |
+| code  | integer | TRUE  |상태 코드  |
+| message | string  | FALSE |오류 설명(오류가 있는 경우) |
+| data  | object  | TRUE  | |
+| { accountId | string  | TRUE  |계정ID |
+| accountStatus | string  | TRUE  | 계정 상태（working 은 정상, lock 잠금）  |
+| acctBalance | string  | TRUE  |계정 잔액  |
+| groupIds  | object  | TRUE  | 쿠폰 그룹ID 리스트 |
+| { groupId | long  | TRUE  | 쿠폰 그룹ID |
+| expiryDate  | long  | TRUE  | 쿠폰 만료 일자（unix time in millisecond）  |
+| remainAmt  }} | string  | TRUE  |잔액 수량  |
 
 설명：<br>
 
@@ -2613,9 +2613,9 @@ API Key 권한：읽기
 설명:
 
 유저가 요청한 시간 범위 내의 건수가 한 개 페이지 제한("limit"필드로 설정)을 초과하는 경우 "nextId"를 반환합니다.
-1）	일부 데이터가 본 페이지에서 전부 반환되지 않은 경우;
-2）	다음 페이지를 조회하려면 서버에 다시 요청하고 "nextId"를 "fromId"로 하여 요청하고 기타 요청하는 파라미터는 변하지 않습니다.
-3）	데이터베이스 기록 ID로서 "nextId"와 "fromId"가 사용되고 페이징 외 기타 업무에는 의미가 없습니다.
+1）  일부 데이터가 본 페이지에서 전부 반환되지 않은 경우;
+2）  다음 페이지를 조회하려면 서버에 다시 요청하고 "nextId"를 "fromId"로 하여 요청하고 기타 요청하는 파라미터는 변하지 않습니다.
+3）  데이터베이스 기록 ID로서 "nextId"와 "fromId"가 사용되고 페이징 외 기타 업무에는 의미가 없습니다.
 
 ## 가상자산 출금
 
@@ -2948,7 +2948,7 @@ API Key 권한：거래
 ```json
 {
   "code": 200,
-	"data": {
+  "data": {
      "subUid": 12902150,
      "userState":"lock"}
 }
@@ -3593,7 +3593,7 @@ API Key 권한：읽기<br>빈도 제한（NEW）：20회/2s
 ```json
 {
   "status": "ok",
-	"data": [
+  "data": [
     {
       "id": 9910049,
       "type": "spot",
@@ -3616,7 +3616,7 @@ API Key 권한：읽기<br>빈도 제한（NEW）：20회/2s
       "type": "point",
       "list": []
     }
-	]
+  ]
 }
 ```
 
@@ -3773,22 +3773,22 @@ API Key 권한：거래<br>빈도 제한（NEW）：50회/2s<br>
 
 ```json
 [
-	{
+  {
     "account-id": "123456",
     "price": "7801",
     "amount": "0.001",
     "symbol": "btcusdt",
     "type": "sell-limit",
     "client-order-id": "c1"
-	},
-	{
+  },
+  {
     "account-id": "123456",
     "price": "7802",
     "amount": "0.001",
     "symbol": "btcusdt",
     "type": "sell-limit",
     "client-order-id": "d2"
-	}
+  }
 ]
 ```
 
@@ -4708,16 +4708,16 @@ symbols    | string    | true     | NA      | 거래 페어, 여러가지 입력
 ```
 ### 응답 데이터
 
-|	매개 변수	|	유형	|	설명	|
+| 매개 변수 | 유형  | 설명  |
 --------- | --------- | ----------- | ----------- | ----------- 
-|	code	|	integer	|	상태 코드	|
-|	message	|	string	|	오류 설명（메시지가 있는 경우）	|
-|	data	|	object	|		|
-|	{ symbol	|	string	|	거래 코드	|
-|	makerFeeRate	|	string	|	기초 비율 - maker, 거래 수수료 페이백, 페이백 비율(음수)|
-|	takerFeeRate	|	string	|	기초 비율 - taker	|
-|	actualMakerRate	|	string	| 삭감후 비율 - maker, 삭감 적용이 안되거나 삭감을 사용하지 않을 경우 기초 수수료를 응답 합니다; 거래 수수료 페이백을 적용한 경우 페이백 비율(음수)을 응답합니다. |
-|	actualTakerRate }	|	string	|	삭감후 비율 – taker, 삭감 적용이 안되거나 삭감을 사용하지 않을 경우 기초 수수료를 응답합니다.	|
+| code  | integer | 상태 코드 |
+| message | string  | 오류 설명（메시지가 있는 경우） |
+| data  | object  |   |
+| { symbol  | string  | 거래 코드 |
+| makerFeeRate  | string  | 기초 비율 - maker, 거래 수수료 페이백, 페이백 비율(음수)|
+| takerFeeRate  | string  | 기초 비율 - taker |
+| actualMakerRate | string  | 삭감후 비율 - maker, 삭감 적용이 안되거나 삭감을 사용하지 않을 경우 기초 수수료를 응답 합니다; 거래 수수료 페이백을 적용한 경우 페이백 비율(음수)을 응답합니다. |
+| actualTakerRate } | string  | 삭감후 비율 – taker, 삭감 적용이 안되거나 삭감을 사용하지 않을 경우 기초 수수료를 응답합니다. |
 
 설명：<br>
 
@@ -5045,14 +5045,14 @@ depth of market 데이터를 일괄 요청합니다.
 **`wss://api-aws.huobi.co.kr/feed`** 
 
 다음 데이터 처리 방식을 추천합니다：<br>
-1）	증분 데이터를 구독하고 cache 하십시오；<br>
-2）	전체 데이터(같은 레벨 데이터)를 요청하고 전체 메시지의 seqNum에 따라 cache 증분 데이터의 prevSeqNum를 정렬하십시오；<br>
-3）	지속적으로 증분 데이터 수신 및 계산을 하고 MBP 주문 리스트를 작성하고 지속적으로 업데이트하십시오；<br>
-4）	각 증분 데이터의 prevSeqNum는 반드시 전 증분 데이터의 seqNum와 같아야 하고 같지 않은 경우 증분 데이터의 누락을 의미합니다. 이런 경우 다시 데이터를 요청하여 정렬해야 합니다；<br>
-5）	반환된 증분 데이터가 price 레벨이 새로 추가되었다면 이 price 레벨은 MBP 주문 리스트에 적당한 위치에 삽입하여야 합니다；<br>
-6）	받은 증분 데이터에 price 레벨이 이미 포함되었고 size가 다를 때 MBP 주문 리스트의 price 레벨의 size를 교체하여야 합니다；<br>
-7）	받은 증분 데이터의 price 레벨의 size 값이 0인 경우 price 레벨을 MBP 주문 리스트에서 삭제해야 합니다；<br>
-8）	받은 한 개의 증분 데이터에 2개 및 2개 이상의 price 레벨이 업그레이드된 경우 price 레벨은 MBP 주문 리스트에  함께 업그레이드 되어야 합니다.<br>
+1）  증분 데이터를 구독하고 cache 하십시오；<br>
+2）  전체 데이터(같은 레벨 데이터)를 요청하고 전체 메시지의 seqNum에 따라 cache 증분 데이터의 prevSeqNum를 정렬하십시오；<br>
+3）  지속적으로 증분 데이터 수신 및 계산을 하고 MBP 주문 리스트를 작성하고 지속적으로 업데이트하십시오；<br>
+4）  각 증분 데이터의 prevSeqNum는 반드시 전 증분 데이터의 seqNum와 같아야 하고 같지 않은 경우 증분 데이터의 누락을 의미합니다. 이런 경우 다시 데이터를 요청하여 정렬해야 합니다；<br>
+5）  반환된 증분 데이터가 price 레벨이 새로 추가되었다면 이 price 레벨은 MBP 주문 리스트에 적당한 위치에 삽입하여야 합니다；<br>
+6）  받은 증분 데이터에 price 레벨이 이미 포함되었고 size가 다를 때 MBP 주문 리스트의 price 레벨의 size를 교체하여야 합니다；<br>
+7）  받은 증분 데이터의 price 레벨의 size 값이 0인 경우 price 레벨을 MBP 주문 리스트에서 삭제해야 합니다；<br>
+8）  받은 한 개의 증분 데이터에 2개 및 2개 이상의 price 레벨이 업그레이드된 경우 price 레벨은 MBP 주문 리스트에  함께 업그레이드 되어야 합니다.<br>
 
 현재 5Level/20Level MBP one by one 증분 및 150Level MBP 데이터 스냅 샷을 푸시 합니다, 차이점은 -<br>
 1） Depth가 다릅니다；<br>
@@ -5158,8 +5158,8 @@ REQ 채널은 5Level/20Level/150Level 전체 데이터를 받을 수 있습니�
 
 ```json
 {
-	"ch": "market.btcusdt.mbp.5",
-	"ts": 1573199608679, //system update time
+  "ch": "market.btcusdt.mbp.5",
+  "ts": 1573199608679, //system update time
   "tick": {
            "seqNum": 100020146795,
             "prevSeqNum": 100020146794,
@@ -5174,26 +5174,26 @@ REQ 채널은 5Level/20Level/150Level 전체 데이터를 받을 수 있습니�
 
 ```json
 {
-	"id": "id2",
-	"rep": "market.btcusdt.mbp.150",
-	"status": "ok",
-	"data": {
-		"seqNum": 100020142010,
-		"bids": [
-			[618.37, 71.594], // [price, size]
-			[423.33, 77.726],
-			[223.18, 47.997],
-			[219.34, 24.82],
-			[210.34, 94.463]
+  "id": "id2",
+  "rep": "market.btcusdt.mbp.150",
+  "status": "ok",
+  "data": {
+    "seqNum": 100020142010,
+    "bids": [
+      [618.37, 71.594], // [price, size]
+      [423.33, 77.726],
+      [223.18, 47.997],
+      [219.34, 24.82],
+      [210.34, 94.463]
     ],
-		"asks": [
-			[650.59, 14.909733438479636],
-			[650.63, 97.996],
-			[650.77, 97.465],
-			[651.23, 83.973],
-			[651.42, 34.465]
-		]
-	}
+    "asks": [
+      [650.59, 14.909733438479636],
+      [650.63, 97.996],
+      [650.77, 97.465],
+      [651.23, 83.973],
+      [651.42, 34.465]
+    ]
+  }
 }
 ```
 
@@ -5249,21 +5249,21 @@ REQ 채널은 5Level/20Level/150Level 전체 데이터를 받을 수 있습니�
 "ts": 1573199608679, //system update time
 "tick": {
 
-		"seqNum": 100020142010,
-		"bids": [
-			[618.37, 71.594], // [price, size]
-			[423.33, 77.726],
-			[223.18, 47.997],
-			[219.34, 24.82],
-			[210.34, 94.463], ... // 남은 15개를 생략
-   		],
-		"asks": [
-			[650.59, 14.909733438479636],
-			[650.63, 97.996],
-			[650.77, 97.465],
-			[651.23, 83.973],
-			[651.42, 34.465], ... // 남은 15개를 생략
-		]
+    "seqNum": 100020142010,
+    "bids": [
+      [618.37, 71.594], // [price, size]
+      [423.33, 77.726],
+      [223.18, 47.997],
+      [219.34, 24.82],
+      [210.34, 94.463], ... // 남은 15개를 생략
+      ],
+    "asks": [
+      [650.59, 14.909733438479636],
+      [650.63, 97.996],
+      [650.77, 97.465],
+      [651.23, 83.973],
+      [651.42, 34.465], ... // 남은 15개를 생략
+    ]
 }
 }
 ```
@@ -6401,8 +6401,8 @@ API Key 권한: 읽기
 
 ```json
 {
-	"action": "sub",
-	"ch": "orders#btcusdt"
+  "action": "sub",
+  "ch": "orders#btcusdt"
 }
 
 ```
@@ -6411,10 +6411,10 @@ API Key 권한: 읽기
 
 ```json
 {
-	"action": "sub",
-	"code": 200,
-	"ch": "orders#btcusdt",
-	"data": {}
+  "action": "sub",
+  "code": 200,
+  "ch": "orders#btcusdt",
+  "data": {}
 }
 ```
 
@@ -6428,19 +6428,19 @@ API Key 권한: 읽기
 
 ```json
 {
-	"action":"push",
-	"ch":"orders#btcusdt",
-	"data":
-	{
-		"orderSide":"buy",
-		"lastActTime":1583853365586,
-		"clientOrderId":"abc123",
-		"orderStatus":"rejected",
-		"symbol":"btcusdt",
-		"eventType":"trigger",
-		"errCode": 2002,
-		"errMessage":"invalid.client.order.id (NT)"
-	}
+  "action":"push",
+  "ch":"orders#btcusdt",
+  "data":
+  {
+    "orderSide":"buy",
+    "lastActTime":1583853365586,
+    "clientOrderId":"abc123",
+    "orderStatus":"rejected",
+    "symbol":"btcusdt",
+    "eventType":"trigger",
+    "errCode": 2002,
+    "errMessage":"invalid.client.order.id (NT)"
+  }
 }
 ```
 
@@ -6461,17 +6461,17 @@ API Key 권한: 읽기
 
 ```json
 {
-	"action":"push",
-	"ch":"orders#btcusdt",
-	"data":
-	{
-		"orderSide":"buy",
-		"lastActTime":1583853365586,
-		"clientOrderId":"abc123",
-		"orderStatus":"canceled",
-		"symbol":"btcusdt",
-		"eventType":"deletion"
-	}
+  "action":"push",
+  "ch":"orders#btcusdt",
+  "data":
+  {
+    "orderSide":"buy",
+    "lastActTime":1583853365586,
+    "clientOrderId":"abc123",
+    "orderStatus":"canceled",
+    "symbol":"btcusdt",
+    "eventType":"deletion"
+  }
 }
 ```
 
@@ -6490,21 +6490,21 @@ API Key 권한: 읽기
 
 ```json
 {
-	"action":"push",
-	"ch":"orders#btcusdt",
-	"data":
-	{
-		"orderSize":"2.000000000000000000",
-		"orderCreateTime":1583853365586,
-		"accountId":992701,
-		"orderPrice":"77.000000000000000000",
-		"type":"sell-limit",
-		"orderId":27163533,
-		"clientOrderId":"abc123",
-		"orderStatus":"submitted",
-		"symbol":"btcusdt",
-		"eventType":"creation"
-	}
+  "action":"push",
+  "ch":"orders#btcusdt",
+  "data":
+  {
+    "orderSize":"2.000000000000000000",
+    "orderCreateTime":1583853365586,
+    "accountId":992701,
+    "orderPrice":"77.000000000000000000",
+    "type":"sell-limit",
+    "orderId":27163533,
+    "clientOrderId":"abc123",
+    "orderStatus":"submitted",
+    "symbol":"btcusdt",
+    "eventType":"creation"
+  }
 }
 ```
 
@@ -6534,23 +6534,23 @@ API Key 권한: 읽기
 
 ```json
 {
-	"action":"push",
-	"ch":"orders#btcusdt",
-	"data":
-	{
-		"tradePrice":"76.000000000000000000",
-		"tradeVolume":"1.013157894736842100",
-		"tradeId":301,
-		"tradeTime":1583854188883,
-		"aggressor":true,
-		"remainAmt":"0.000000000000000400000000000000000000",
-		"orderId":27163536,
-		"type":"sell-limit",
-		"clientOrderId":"abc123",
-		"orderStatus":"filled",
-		"symbol":"btcusdt",
-		"eventType":"trade"
-	}
+  "action":"push",
+  "ch":"orders#btcusdt",
+  "data":
+  {
+    "tradePrice":"76.000000000000000000",
+    "tradeVolume":"1.013157894736842100",
+    "tradeId":301,
+    "tradeTime":1583854188883,
+    "aggressor":true,
+    "remainAmt":"0.000000000000000400000000000000000000",
+    "orderId":27163536,
+    "type":"sell-limit",
+    "clientOrderId":"abc123",
+    "orderStatus":"filled",
+    "symbol":"btcusdt",
+    "eventType":"trade"
+  }
 }
 ```
 
@@ -6580,19 +6580,19 @@ API Key 권한: 읽기
 
 ```json
 {
-	"action":"push",
-	"ch":"orders#btcusdt",
-	"data":
-	{
-		"lastActTime":1583853475406,
-		"remainAmt":"2.000000000000000000",
-		"orderId":27163533,
-		"type":"sell-limit",
-		"clientOrderId":"abc123",
-		"orderStatus":"canceled",
-		"symbol":"btcusdt",
-		"eventType":"cancellation"
-	}
+  "action":"push",
+  "ch":"orders#btcusdt",
+  "data":
+  {
+    "lastActTime":1583853475406,
+    "remainAmt":"2.000000000000000000",
+    "orderId":27163533,
+    "type":"sell-limit",
+    "clientOrderId":"abc123",
+    "orderStatus":"canceled",
+    "symbol":"btcusdt",
+    "eventType":"cancellation"
+  }
 }
 ```
 
@@ -6642,8 +6642,8 @@ orders#${symbol}。<br>
 
 ```json
 {
-	"action": "sub",
-	"ch": "trade.clearing#btcusdt#0"
+  "action": "sub",
+  "ch": "trade.clearing#btcusdt#0"
 }
 
 ```
@@ -6652,10 +6652,10 @@ orders#${symbol}。<br>
 
 ```json
 {
-	"action": "sub",
-	"code": 200,
-	"ch": "trade.clearing#btcusdt#0",
-	"data": {}
+  "action": "sub",
+  "code": 200,
+  "ch": "trade.clearing#btcusdt#0",
+  "data": {}
 }
 ```
 
