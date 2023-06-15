@@ -224,7 +224,7 @@ commit+push() {
     # add github token
     repo="https://"$GH_TOKEN"@github.com/alphaex-api/openapi.git"
     git remote add origin-pages $repo
-    git push --quiet origin-pages $deploy_branch
+    git push --force origin-pages $deploy_branch
   else
     # manual deploy
     git push --quiet $repo $deploy_branch
