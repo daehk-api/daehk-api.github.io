@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BRANCH=v1_cn
+BRANCH=v1_hk
 
 LOCAL=$(git log $BRANCH -n 1 --pretty=format:"%H")
 
