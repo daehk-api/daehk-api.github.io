@@ -30,7 +30,7 @@ The example of request and response is showing in the right hand side.
 
 It is very welcome for market maker who has good market making strategy and large trading volume. If your Huobi Spot account or Contract account has at least 10 BTC, you can send your email to:
 
-- [MM-hk@bitv.com](mailto:MM-hk@bitv.com) for Huobi Korea (spot) market maker
+- [MM-hk@bitv.com](mailto:MM-hk@bitv.com) for Hong Kong (spot) market maker
 
 And provide below details:
 
