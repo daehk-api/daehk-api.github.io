@@ -11110,28 +11110,33 @@ The account update pushes the amount received, and multiple transaction rebates 
       </div>
     </div>
     <script>
-  const lang_btn_en = document.getElementById('lang_box_en');
+ const lang_btn_en = document.getElementById('lang_box_en');
   const lang_btn_cn = document.getElementById('lang_box_zn');
+  const lang_btn_hk = document.getElementById('lang_box_hk');
       const url = GetUrlRelativePath();
-      if(url.indexOf('cn') != -1){
-        //如果是中文环境
-        lang_btn_cn.innerHTML = '繁体中文';
-        lang_btn_cn.href = url.replace('cn/', 'hk/');
-
-        lang_btn_en.href = url.replace('cn/', 'en/');
-      }else if(url.indexOf('en') != -1){
-        //如果是英文环境
-        lang_btn_en.innerHTML = '繁体中文';
-        lang_btn_en.href = url.replace('en/', 'hk/');
-
-        lang_btn_cn.href = url.replace('en/', 'cn/');
-      } else if(url.indexOf('hk') != -1){ 
-   //如果是繁体中文环境
-    lang_btn_hk.innerHTML = '简体中文';
-    lang_btn_hk.href = url.replace('hk/', 'cn/');
-
-    lang_btn_en.href = url.replace('hk/', 'en/');
+  if(url.indexOf('cn') != -1){
+    // 如果是简体中文环境
+    lang_btn_en.innerHTML = 'English';
+    lang_btn_en.href = url.replace('cn/', 'en/');
+    
+    lang_btn_cn.innerHTML = '繁体中文';
+    lang_btn_cn.href = url.replace('cn/', 'hk/');
+  }else if(url.indexOf('en') != -1){
+    // 如果是英文环境
+    lang_btn_en.innerHTML = '简体中文';
+    lang_btn_en.href = url.replace('en/', 'cn/');
+    
+    lang_btn_cn.innerHTML = '繁体中文';
+    lang_btn_cn.href = url.replace('en/', 'hk/');
+  }else if(url.indexOf('hk') != -1){
+    // 如果是繁体中文环境
+    lang_btn_en.innerHTML = '简体中文';
+    lang_btn_en.href = url.replace('hk/', 'cn/');
+    
+    lang_btn_cn.innerHTML = 'English';
+    lang_btn_cn.href = url.replace('hk/', 'en/');
   }
+  
       //显示语言切换按钮
   lang_btn_cn.style.display = 'block';
   lang_btn_en.style.display = 'block';
