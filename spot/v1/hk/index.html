@@ -11451,7 +11451,6 @@ accounts.update#1<br>
     <script>
   const lang_btn_en = document.getElementById('lang_box_en');
   const lang_btn_cn = document.getElementById('lang_box_zn');
-  const lang_btn_hk = document.getElementById('lang_box_hk');  // 新增的繁体中文按钮
       const url = GetUrlRelativePath();
       if(url.indexOf('cn') != -1){
         //如果是中文环境
@@ -11475,7 +11474,6 @@ accounts.update#1<br>
       //显示语言切换按钮
   lang_btn_cn.style.display = 'block';
   lang_btn_en.style.display = 'block';
-  lang_btn_hk.style.display = 'block'; 
       function GetUrlRelativePath(){
         let url = document.location.toString();
         let arrUrl = url.split("//");
